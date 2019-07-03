@@ -1,2 +1,7 @@
 <h1>Requests#index</h1>
 <p>Find me in app/views/requests/index.html.erb</p>
+
+
+<% @requests.each do |r| %>
+<%= link_to r.name, request_path(r) %>
+<% end %>
