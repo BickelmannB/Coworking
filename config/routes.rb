@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :requests, only: [:index, :new, :create, :show]
+  get '/:token/confirm_email/', to: "request#confirm_email", as: 'confirm_email'
 end
