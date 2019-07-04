@@ -25,15 +25,23 @@ class RequestsController < ApplicationController
   end
 
   def confirm_email
-    request = Request.find_by_confirm_token(params[:token])
-    if request
-      request.validate_email
-      request.save(validate: false)
-      redirect_to request
+    @request = Request.find_by_confirm_token(params[:token])
+    if @request
+      @request.email_confirmed = true
+      @request.save!
+      flash[:success] = "Welcome to the Sample App! Your email has been confirmed.
+      Please sign in to continue."
+      UserMailer.three_month_mail(@request).deliver_later(wait_until: 10.seconds.from_now)
+      redirect_to request_path(@request)
     else
       flash[:error] = "Sorry. User does not exist"
       redirect_to root_url
     end
+  end
+
+  def reconfirm_email
+    @request = Request.find_by_confirm_token(params[:token])
+    UserMailer.three_month_mail(@request).deliver_later(wait_until: 10.seconds.from_now)
   end
 
   private

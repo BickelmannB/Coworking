@@ -1,0 +1,6 @@
+ Hi <%= @request.name %>,
+
+ To confirm your registration on waiting list click the URL below.
+  If you do not, you will be automatically excluded from the list after 24 hours
+
+<%=  link_to "confirm", confirm_email_url(@request.confirm_token)%>
