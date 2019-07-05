@@ -1,4 +1,5 @@
 class RequestsController < ApplicationController
+
   def index
     @requests = Request.all
   end
@@ -30,9 +31,8 @@ class RequestsController < ApplicationController
       @request.email_confirmed = true
       @request.statut = 'confirmed'
       @request.save!
-      flash[:success] = "Welcome to the Sample App! Your email has been confirmed.
-      Please sign in to continue."
-      reconfirm_email
+      flash[:success] = "Welcome to Coworking! Your email has been confirmed."
+      UserMailer.three_month_mail(@request).deliver_later(wait_until: 3.months.from_now)
       redirect_to request_path(@request)
     else
       flash[:error] = "Sorry. User does not exist"
@@ -42,7 +42,24 @@ class RequestsController < ApplicationController
 
   def reconfirm_email
     @request = Request.find_by_confirm_token(params[:token])
-    UserMailer.three_month_mail(@request).deliver_later(wait_until: 3.months.from_now)
+    if @request
+      @request.statut = 'confirmed'
+      @request.save!
+    else
+      flash[:error] = "Sorry. User does not exist"
+      redirect_to root_url
+    end
+  end
+
+  def unconfirm_email
+    @request = Request.find_by_confirm_token(params[:token])
+    if @request
+      @request.statut = 'expired'
+      @request.save!
+    else
+      flash[:error] = "Sorry. User does not exist"
+      redirect_to root_url
+    end
   end
 
   private
