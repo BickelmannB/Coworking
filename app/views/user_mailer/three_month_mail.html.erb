@@ -3,4 +3,7 @@
  To confirm your registration on waiting list click the URL below.
   If you do not, you will be automatically excluded from the list after 24 hours
 
-<%=  link_to "confirm", confirm_email_url(@request.confirm_token)%>
+<%=  link_to "confirm", reconfirm_email_url(@request.confirm_token)%>
+
+If you no longer want to be on the waiting list
+<%= link_to "Click here", unconfirm_email_url(@request.confirm_token) %>
