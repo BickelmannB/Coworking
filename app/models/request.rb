@@ -10,12 +10,38 @@ class Request < ApplicationRecord
     end
   end
 
-  private
+  def accept!(request)
+    @request = request
+    request = Request.find(params[:id])
+    if request
+      request.statut = 'accepted'
+      request.save!
+    else
+      flash[:error] = "Sorry, Request does not exist"
+      redirect_to root_url
+    end
+  end
 
+  def accepted
+    @requests = Request.where(statut: 'accepted')
+  end
+
+  def unconfirmed
+    @requests = Request.where(statut: 'unconfirmed')
+  end
+
+  def confirmed
+    @requests = Request.where(statut: 'confirmed')
+  end
+
+  def expired
+    @requests = Request.where(statut: 'expired')
+  end
+
+  private
 
   def validate_email
     self.email_confirmed = true
     self.confirm_token = nil
   end
-
 end
