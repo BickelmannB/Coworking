@@ -1,11 +1,11 @@
-<h1>Requests#new</h1>
-<p>Find me in app/views/requests/new.html.erb</p>
-
+<div class="container text-center">
+<h1 class="pt-3 pb-5">Book a new workplace</h1>
 
 <%= simple_form_for @request do |f| %>
   <%= f.input :name, placeholder: 'Enter your name' %>
   <%= f.input :email, placeholder: 'Enter your email' %>
   <%= f.input :phone_number, placeholder: 'Enter your phone number' %>
   <%= f.input :biography, placeholder: 'Please tell us a bit more about yourself' %>
-  <%= f.button :submit %>
+  <button type="button" class="btn btn-outline-success"><%= f.button :submit %> </button>
 <% end %>
+</div>

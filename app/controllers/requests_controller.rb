@@ -1,7 +1,6 @@
 class RequestsController < ApplicationController
-
   def index
-    @requests = Request.all
+    @requests = Request.where(statut: 'confirmed').order(created_at: :asc)
   end
 
   def show
@@ -19,10 +18,22 @@ class RequestsController < ApplicationController
       @request.save(validate: false)
       UserMailer.registration_confirmation(@request).deliver_now
       flash[:success] = "Please confirm your email address to continue"
+      redirect_to requests_path
     else
       flash[:error] = "Invalid, please try again"
       render :new
     end
+  end
+
+  def contract_acceptation
+    @request = Request.find_by_confirm_token(params[:token])
+    if @request
+      @request.contract_accepted = true
+      @request.save!
+      flash[:success] = "Welcome to Coworking! your contract has been signed. it will be automatically renewed every month"
+      UserMailer.one_month_contract(@request).deliver_later(wait_until: 1.month.from_now)
+    end
+    redirect_to request_path(@request)
   end
 
   def confirm_email
@@ -33,10 +44,10 @@ class RequestsController < ApplicationController
       @request.save!
       flash[:success] = "Welcome to Coworking! Your email has been confirmed."
       UserMailer.three_month_mail(@request).deliver_later(wait_until: 3.months.from_now)
-      redirect_to request_path(@request)
+      redirect_to requests_path
     else
-      flash[:error] = "Sorry. User does not exist"
-      redirect_to root_url
+      flash[:error] = "Sorry. A problem has appeared"
+      redirect_to root_path
     end
   end
 
@@ -45,9 +56,11 @@ class RequestsController < ApplicationController
     if @request
       @request.statut = 'confirmed'
       @request.save!
+      UserMailer.three_month_mail(@request).deliver_later(wait_until: 3.months.from_now)
+      redirect_to request_path(@request)
     else
-      flash[:error] = "Sorry. User does not exist"
-      redirect_to root_url
+      flash[:error] = "Sorry. A problem has appeared"
+      redirect_to root_path
     end
   end
 
@@ -57,9 +70,9 @@ class RequestsController < ApplicationController
       @request.statut = 'expired'
       @request.save!
     else
-      flash[:error] = "Sorry. User does not exist"
-      redirect_to root_url
+      flash[:error] = "Sorry. A problem has appeared"
     end
+    redirect_to root_path
   end
 
   private

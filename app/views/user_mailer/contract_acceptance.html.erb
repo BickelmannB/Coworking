@@ -17,13 +17,10 @@
             <tr>
               <td>
               <h1> Hi <trong><%= @request.name.capitalize %></trong>, </h1>
-              <h2>
- To confirm your registration on waiting list click the URL below.
-  If you do not, you will be automatically excluded from the list after 24 hours
-              <p class="mail"><strong><%=  link_to "Confirm my registration!", reconfirm_email_url(@request.confirm_token)%>
+              <h2>You've been accepted to Coworking! To sign your contract click the URL below.
+              </h2>
+              <p class="mail"><strong><%=  link_to "Here!", contract_acceptation_url(@request.confirm_token)%>
               </strong></p>
-              <h2>If you no longer want to be on the waiting list</h2>
-                <p class="mail"><strong><%=  link_to "I don't want to", unconfirm_email_url(@request.confirm_token)%>
             </td>
           </tr>
         </table>

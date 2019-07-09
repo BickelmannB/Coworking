@@ -10,4 +10,14 @@ class UserMailer < ApplicationMailer
     @request = request
     mail(to: "#{request.name} <#{request.email}", subject: 'Waiting Confirmation for Coworking')
   end
+
+  def contract_acceptance(request)
+    @request = request
+    mail(to: "#{request.name} <#{request.email}", subject: 'Contract for Coworking')
+  end
+
+  def one_month_contract(request)
+    @request = request
+    mail(to: "#{request.name} <#{request.email}", subject: 'Contract Renewal')
+  end
 end
