@@ -12,6 +12,18 @@ class Request < ApplicationRecord
 
   def accept!
     self.statut = 'accepted'
+    save!
+    contract
+  end
+
+  def contract
+    UserMailer.contract_acceptance(self).deliver_now
+    redirect_to root_url
+  end
+
+  def self.accept!
+    list = Request.confirmed
+    list.first.accept! unless list.empty?
   end
 
   def self.accepted
@@ -23,7 +35,7 @@ class Request < ApplicationRecord
   end
 
   def self.confirmed
-    @requests = Request.where(statut: 'confirmed')
+    @requests = Request.where(statut: 'confirmed').order(created_at: :asc)
   end
 
   def self.expired
