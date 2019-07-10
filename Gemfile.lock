@@ -211,6 +211,7 @@ DEPENDENCIES
   pry-rails
   puma
   rails (= 5.2.3)
+  rake
   redis
   sassc-rails
   sidekiq

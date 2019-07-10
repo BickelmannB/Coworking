@@ -1,0 +1,43 @@
+current directory: /home/brice/code/BickelmannB/Coworking/vendor/bundle/ruby/2.5.0/gems/puma-4.0.0/ext/puma_http11
+/home/brice/.rbenv/versions/2.5.3/bin/ruby -r ./siteconf20190710-8755-w71apf.rb extconf.rb
+checking for BIO_read() in -lcrypto... yes
+checking for SSL_CTX_new() in -lssl... yes
+checking for openssl/bio.h... yes
+creating Makefile
+
+current directory: /home/brice/code/BickelmannB/Coworking/vendor/bundle/ruby/2.5.0/gems/puma-4.0.0/ext/puma_http11
+make "DESTDIR=" clean
+
+current directory: /home/brice/code/BickelmannB/Coworking/vendor/bundle/ruby/2.5.0/gems/puma-4.0.0/ext/puma_http11
+make "DESTDIR="
+compiling http11_parser.c
+compiling io_buffer.c
+compiling mini_ssl.c
+mini_ssl.c: In function ‘get_dh1024’:
+mini_ssl.c:100:3: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+   BIGNUM *p, *g;
+   ^~~~~~
+mini_ssl.c: In function ‘engine_init_server’:
+mini_ssl.c:154:3: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+   ID sym_cert = rb_intern("cert");
+   ^~
+mini_ssl.c:159:3: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+   ID sym_ca = rb_intern("ca");
+   ^~
+mini_ssl.c:199:3: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+   DH *dh = get_dh1024();
+   ^~
+mini_ssl.c: In function ‘raise_error’:
+mini_ssl.c:266:6: warning: function might be candidate for attribute ‘noreturn’ [-Wsuggest-attribute=noreturn]
+ void raise_error(SSL* ssl, int result) {
+      ^~~~~~~~~~~
+mini_ssl.c: At top level:
+cc1: warning: unrecognized command line option ‘-Wno-self-assign’
+cc1: warning: unrecognized command line option ‘-Wno-constant-logical-operand’
+cc1: warning: unrecognized command line option ‘-Wno-parentheses-equality’
+compiling puma_http11.c
+linking shared-object puma/puma_http11.so
+
+current directory: /home/brice/code/BickelmannB/Coworking/vendor/bundle/ruby/2.5.0/gems/puma-4.0.0/ext/puma_http11
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 puma_http11.so ./.gem.20190710-8755-qhi9u0/puma
