@@ -200,6 +200,7 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bootsnap
+  bundler (= 2.0.1)
   dotenv-rails
   email_validator
   font-awesome-sass (~> 5.6.1)
