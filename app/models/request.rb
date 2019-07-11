@@ -18,7 +18,7 @@ class Request < ApplicationRecord
 
   def contract
     UserMailer.contract_acceptance(self).deliver_now
-    redirect_to root_url
+    redirect_to root_path
   end
 
   def self.accept!
