@@ -8,6 +8,7 @@ gem 'puma'
 gem 'sassc-rails'
 gem 'rails', '5.2.3'
 gem 'redis'
+gem 'postmark-rails'
 # gem 'rake'
 # gem 'bundler', '2.0.2'
 
