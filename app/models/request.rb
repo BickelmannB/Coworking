@@ -5,9 +5,7 @@ class Request < ApplicationRecord
   validates :biography, presence: true, length: { maximum: 500 }
 
   def set_confirmation_token
-    if self.confirm_token.blank?
-      self.confirm_token = SecureRandom.urlsafe_base64.to_s
-    end
+    self.confirm_token = SecureRandom.urlsafe_base64.to_s if confirm_token.blank?
   end
 
   def accept!
@@ -27,25 +25,18 @@ class Request < ApplicationRecord
   end
 
   def self.accepted
-    @requests = Request.where(statut: 'accepted')
+    Request.where(statut: 'accepted')
   end
 
   def self.unconfirmed
-    @requests = Request.where(statut: 'unconfirmed')
+    Request.where(statut: 'unconfirmed')
   end
 
   def self.confirmed
-    @requests = Request.where(statut: 'confirmed').order(created_at: :asc)
+    Request.where(statut: 'confirmed').order(created_at: :asc)
   end
 
   def self.expired
-    @requests = Request.where(statut: 'expired')
-  end
-
-  private
-
-  def validate_email
-    self.email_confirmed = true
-    self.confirm_token = nil
+    Request.where(statut: 'expired')
   end
 end

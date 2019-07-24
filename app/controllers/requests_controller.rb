@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
   def index
-    @requests = Request.where(statut: 'confirmed').order(created_at: :asc)
+    @requests = Request.confirmed
   end
 
   def show
@@ -13,9 +13,8 @@ class RequestsController < ApplicationController
 
   def create
     @request = Request.new(request_params)
-    if @request.save
       @request.set_confirmation_token
-      @request.save(validate: false)
+    if @request.save
       UserMailer.registration_confirmation(@request).deliver_now
       flash[:success] = "Please confirm your email address to continue"
       redirect_to requests_path
