@@ -1,31 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Un Email Responsive</title>
-    <style type="text/css">
-    body {margin: 0; padding: 0; min-width: 100%!important;}
-    .content {width: 100%; max-width: 600px;}
-    .mail {text-decoration: none; }
-    </style>
-  </head>
-  <body yahoo bgcolor="#f6f8f1">
-    <table width="100%" bgcolor="#f6f8f1" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td>
-          <table class="content" align="center" cellpadding="0" cellspacing="0" border="0">
-            <tr>
-              <td>
-              <h1> Hi <trong><%= @request.name.capitalize %></trong>, </h1>
-              <h2>You've been accepted to Coworking! To renew your contract click the URL below.
-              </h2>
-              <p class="mail"><strong><%=  link_to "Here!", contract_acceptation_url(@request.confirm_token)%>
-              </strong></p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
+<h1> Hi <strong><%= @request.name.capitalize %></strong>, </h1>
+<h2>You've been accepted to Coworking! To renew your contract click the URL below.
+</h2>
+<p class="mail"><strong><%=  link_to "Here!", contract_acceptation_url(@request.confirm_token)%>
+</strong></p>
