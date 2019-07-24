@@ -1,4 +1,4 @@
-<h1> Hi <trong><%= @request.name.capitalize %></trong>, </h1>
-<h2>Thanks for registering! To confirm your registration click the URL below.
-</h2>
-<p class="mail"><strong><%=  link_to "Here!", confirm_email_url(@request.confirm_token)%> </strong> </p>
+Hi <%= @request.name.capitalize %>,
+Thanks for registering! To confirm your registration click the URL below.
+
+<%=  link_to "Here!", confirm_email_url(@request.confirm_token)%>
