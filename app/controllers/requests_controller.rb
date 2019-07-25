@@ -13,8 +13,8 @@ class RequestsController < ApplicationController
 
   def create
     @request = Request.new(request_params)
-      @request.set_confirmation_token
-    if @request.save
+    @request.set_confirmation_token
+    if @request.save!
       UserMailer.registration_confirmation(@request).deliver_now
       flash[:success] = "Please confirm your email address to continue"
       redirect_to requests_path

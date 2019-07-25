@@ -10,7 +10,7 @@ class Request < ApplicationRecord
 
   def accept!
     self.statut = 'accepted'
-    save!
+    save
     contract
   end
 
