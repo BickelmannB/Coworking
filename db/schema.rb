@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_08_152953) do
+ActiveRecord::Schema.define(version: 2019_07_30_095943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,4 +28,27 @@ ActiveRecord::Schema.define(version: 2019_07_08_152953) do
     t.boolean "contract_accepted", default: false
   end
 
+  create_table "reservations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "workplaces_id"
+    t.datetime "starting_date"
+    t.datetime "ending_date"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
+    t.index ["workplaces_id"], name: "index_reservations_on_workplaces_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password"
+    t.boolean "admin", default: false
+  end
+
+  create_table "workplaces", force: :cascade do |t|
+    t.string "name"
+    t.integer "total_places"
+    t.integer "available_places"
+  end
+
+  add_foreign_key "reservations", "users"
+  add_foreign_key "reservations", "workplaces", column: "workplaces_id"
 end
