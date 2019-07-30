@@ -16,11 +16,13 @@
           <table class="content" align="center" cellpadding="0" cellspacing="0" border="0">
             <tr>
               <td>
-              <h1> Hi <trong><%= @request.name.capitalize %></trong>, </h1>
+              <h1> Hi <strong><%= @request.name.capitalize %></strong>, </h1>
               <h2>You've been accepted to Coworking! To sign your contract click the URL below.
               </h2>
               <p class="mail"><strong><%=  link_to "Here!", contract_acceptation_url(@request.confirm_token)%>
               </strong></p>
+
+              <p>it's now time to <%= link_to "create your account !", new_user_registration_url %> and select a workplace.</p>
             </td>
           </tr>
         </table>

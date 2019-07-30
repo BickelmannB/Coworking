@@ -4,6 +4,8 @@ class Request < ApplicationRecord
   validates :phone_number, presence: true, numericality: { only_integer: true }
   validates :biography, presence: true, length: { maximum: 500 }
 
+  after_update :new_user
+
   def set_confirmation_token
     self.confirm_token = SecureRandom.urlsafe_base64.to_s if confirm_token.blank?
   end
@@ -38,5 +40,9 @@ class Request < ApplicationRecord
 
   def self.expired
     Request.where(statut: 'expired')
+  end
+
+  def new_user
+    User.create(email: email, encrypted_password: SecureRandom.hex(10)) if contract_accepted
   end
 end
