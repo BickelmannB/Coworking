@@ -16,16 +16,17 @@
           <table class="content" align="center" cellpadding="0" cellspacing="0" border="0">
             <tr>
               <td>
-              <h1> Hi <strong><%= @request.name.capitalize %></strong>, </h1>
-              <h2>You've been accepted to Coworking! To sign your contract click the URL below.
-              </h2>
-              <p class="mail"><strong><%=  link_to "Here!", contract_acceptation_url(@request.confirm_token)%>
-              </strong></p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
+                <h1> Hi </h1>
+                <h2>here is a summary of your login information:
+                </h2>
+                <p>email : <%= @user.email %></p>
+                <p>password : <%= @user.password %></p>
+                <p>Please <%= link_to "change", edit_user_password_url(@u) %> your password as soon as possible !</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
 </html>

@@ -20,4 +20,9 @@ class UserMailer < ApplicationMailer
     @request = request
     mail(to: "#{request.name} <#{request.email}>", subject: 'Contract Renewal')
   end
+
+  def profil_user_mail(user)
+    @user = user
+    mail(to: "#{user.email} <#{user.email}>", subject: 'Login informations')
+  end
 end

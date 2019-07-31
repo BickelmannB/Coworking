@@ -43,6 +43,15 @@ class Request < ApplicationRecord
   end
 
   def new_user
-    User.create(email: email, encrypted_password: SecureRandom.hex(10)) if contract_accepted
+    if contract_accepted
+      @u = User.new(email: email, password: 'password123')
+      @u.save!
+      user_mail
+    end
+  end
+
+  def user_mail
+    UserMailer.profil_user_mail(@u).deliver_now
+    redirect_to root_path
   end
 end
