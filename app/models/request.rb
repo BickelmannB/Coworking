@@ -18,7 +18,6 @@ class Request < ApplicationRecord
 
   def contract
     UserMailer.contract_acceptance(self).deliver_now
-    redirect_to root_path
   end
 
   def self.accept!
@@ -46,12 +45,7 @@ class Request < ApplicationRecord
     if contract_accepted
       @u = User.new(email: email, password: 'password123')
       @u.save!
-      user_mail
+      UserMailer.profil_user_mail(@u).deliver_now
     end
-  end
-
-  def user_mail
-    UserMailer.profil_user_mail(@u).deliver_now
-    redirect_to root_path
   end
 end

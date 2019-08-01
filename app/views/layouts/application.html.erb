@@ -26,23 +26,33 @@
           <li class="nav-item border-right">
             <%= link_to "Waiting list", "/requests", class: "nav-link" %>
           </li>
-          <li class="nav-item">
+          <li class="nav-item border-right">
             <%= link_to "Book a workplace", "/requests/new", class: "nav-link" %>
           </li>
+          <% if user_signed_in? %>
+          <li class="nav-item border-right">
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= current_user.email %>
+          <% else %>
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          </li>
+          <% end %>
         </ul>
       </div>
     </div>
     <%= yield %>
     <div class="footer">
-  <div class="footer-links">
-    <a href="#"><i class="fab fa-github"></i></a>
-    <a href="#"><i class="fab fa-instagram"></i></a>
-    <a href="#"><i class="fab fa-facebook"></i></a>
-    <a href="#"><i class="fab fa-twitter"></i></a>
-    <a href="#"><i class="fab fa-linkedin"></i></a>
-  </div>
-</div>
-
+      <div class="footer-links">
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
   </body>

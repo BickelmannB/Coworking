@@ -11,6 +11,12 @@ class RequestsController < ApplicationController
     @request = Request.new
   end
 
+  def accept
+    @request = Request.find_by_confirm_token(params[:token])
+    @request.accept!
+    redirect_to requests_path
+  end
+
   def create
     @request = Request.new(request_params)
     @request.set_confirmation_token

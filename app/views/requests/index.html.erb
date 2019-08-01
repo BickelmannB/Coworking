@@ -1,25 +1,26 @@
 <div class="container text-center">
-<h1>Waiting list</h1>
-<p>Here is the order in which the next requests will be accepted</p>
+  <h1>Waiting list</h1>
+  <p>Here is the order in which the next requests will be accepted</p>
 </div>
-
 <div class="container">
-<div class="table-responsive">
-  <table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">Position</th>
-      <th scope="col">Name</th>
-    </tr>
-  </thead>
-  <tbody>
-<% @requests.each_with_index do |r, index| %>
-    <tr>
-      <th scope="row"><%= index + 1 %></th>
-      <td> <%= link_to r.name.capitalize, request_path(r) %></td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-</div>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Position</th>
+          <th scope="col">Name</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @requests.each_with_index do |r, index| %>
+        <tr>
+          <td> <%= index + 1 %></td>
+          <td> <%= link_to r.name.capitalize, request_path(r) %></td>
+          <td> <%= link_to "Accept!", accept_url(r.confirm_token) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

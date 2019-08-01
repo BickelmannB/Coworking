@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/:token/unconfirm_email', to: "requests#unconfirm_email", as: 'unconfirm_email'
   get '/:token/contract', to: "requests#contract", as: 'contract'
   get '/:token/contract_acceptation', to: "requests#contract_acceptation", as: 'contract_acceptation'
+  get '/request/accept/:token', to: "requests#accept", as: 'accept'
   resources :requests, only: [:index, :new, :create, :show]
 
 end

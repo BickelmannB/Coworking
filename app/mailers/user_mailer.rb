@@ -23,6 +23,6 @@ class UserMailer < ApplicationMailer
 
   def profil_user_mail(user)
     @user = user
-    mail(to: "#{user.email} <#{user.email}>", subject: 'Login informations')
+    mail(to: " Username <#{user.email}>", subject: 'Login informations')
   end
 end
