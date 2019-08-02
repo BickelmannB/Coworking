@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def configure_permitted_parameters
     update_attrs = [:password, :password_confirmation]

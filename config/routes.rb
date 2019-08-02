@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { sessions: "sessions" }
   # require "sidekiq/web"
   # authenticate :user, lambda { |u| u.admin } do
   #   mount Sidekiq::Web => '/sidekiq'
