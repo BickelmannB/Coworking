@@ -9,7 +9,9 @@
         <tr>
           <th scope="col">Position</th>
           <th scope="col">Name</th>
+          <% if current_user && current_user.admin? %>
           <th scope="col">Action</th>
+          <% end %>
         </tr>
       </thead>
       <tbody>
@@ -17,7 +19,9 @@
         <tr>
           <td> <%= index + 1 %></td>
           <td> <%= link_to r.name.capitalize, request_path(r) %></td>
-          <td> <%= link_to "Accept!", accept_url(r.confirm_token) %></td>
+          <% if current_user && current_user.admin? %>
+          <td> <%= link_to "Accept!", accept_url(r.confirm_token), class: 'btn btn-success' %></td>
+          <% end %>
         </tr>
         <% end %>
       </tbody>
