@@ -7,10 +7,6 @@ class User < ApplicationRecord
   before_update :pass_changed
 
   def pass_changed
-    if encrypted_password_changed?
-      self.password_changed = Time.now
-      self.already_logged
-      save
-    end
+    self.already_logged = true if changed.include? 'encrypted_password'
   end
 end

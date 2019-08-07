@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
   devise_for :users
-  # require "sidekiq/web"
-  # authenticate :user, lambda { |u| u.admin } do
-  #   mount Sidekiq::Web => '/sidekiq'
-  # end
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get '/:token/confirm_email', to: "requests#confirm_email", as: 'confirm_email'
@@ -12,6 +8,7 @@ Rails.application.routes.draw do
   get '/:token/contract', to: "requests#contract", as: 'contract'
   get '/:token/contract_acceptation', to: "requests#contract_acceptation", as: 'contract_acceptation'
   get '/request/accept/:token', to: "requests#accept", as: 'accept'
+  # get '/users/password/edit', to: "devise/passwords#edit", as: 'pass_edit'
   resources :requests, only: [:index, :new, :create, :show]
 
 end
