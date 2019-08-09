@@ -3,11 +3,12 @@ class ApplicationController < ActionController::Base
   before_action :check_pass_changed
 
   def configure_permitted_parameters
-    update_attrs = [:password, :password_confirmation, :current_password]
+    update_attrs = [:password, :password_confirmation]
     devise_parameter_sanitizer.permit :account_update, keys: update_attrs
   end
 
   private
+
 
   def check_pass_changed
     @exclude_action = [["edit", "passwords"], ["update", "passwords"], ["destroy", "sessions"],

@@ -1,0 +1,26 @@
+<div class="container text-center">
+  <h1>Workplaces</h1>
+  <p>Here is the list of available Workplaces</p>
+</div>
+<div class="container">
+  <div class="table-responsive">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Total places</th>
+          <th scope="col">Available places</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @workplaces.each do |w| %>
+        <tr>
+          <td> <%= link_to w.name.capitalize, workplace_path(w) %></td>
+          <td><%= w.total_places %></td>
+          <td><%= w.available_places %></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

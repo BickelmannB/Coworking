@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   get '/request/accept/:token', to: "requests#accept", as: 'accept'
   # get '/users/password/edit', to: "devise/passwords#edit", as: 'pass_edit'
   resources :requests, only: [:index, :new, :create, :show]
+  resources :workplaces, only: [:index, :new, :create, :show, :edit, :update, :destroy]
 
 end
