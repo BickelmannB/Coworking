@@ -20,7 +20,7 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new(request_params)
     @request.set_confirmation_token
-    if @request.save!
+    if @request.save
       UserMailer.registration_confirmation(@request).deliver_now
       flash[:success] = "Please confirm your email address to continue"
       redirect_to requests_path
@@ -34,7 +34,7 @@ class RequestsController < ApplicationController
     @request = Request.find_by_confirm_token(params[:token])
     if @request
       @request.contract_accepted = true
-      @request.save!
+      @request.save
       flash[:success] = "Welcome to Coworking! your contract has been signed. it will be automatically renewed every month"
       UserMailer.one_month_contract(@request).deliver_later(wait_until: 1.month.from_now)
     end
@@ -46,7 +46,7 @@ class RequestsController < ApplicationController
     if @request
       @request.email_confirmed = true
       @request.statut = 'confirmed'
-      @request.save!
+      @request.save
       flash[:success] = "Welcome to Coworking! Your email has been confirmed."
       UserMailer.three_month_mail(@request).deliver_later(wait_until: 3.months.from_now)
       redirect_to requests_path
@@ -60,7 +60,7 @@ class RequestsController < ApplicationController
     @request = Request.find_by_confirm_token(params[:token])
     if @request
       @request.statut = 'confirmed'
-      @request.save!
+      @request.save
       UserMailer.three_month_mail(@request).deliver_later(wait_until: 3.months.from_now)
       redirect_to request_path(@request)
     else
@@ -73,7 +73,7 @@ class RequestsController < ApplicationController
     @request = Request.find_by_confirm_token(params[:token])
     if @request
       @request.statut = 'expired'
-      @request.save!
+      @request.save
     else
       flash[:error] = "Sorry. A problem has appeared"
     end

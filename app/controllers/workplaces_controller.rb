@@ -1,5 +1,5 @@
 class WorkplacesController < ApplicationController
-    before_action :check_user_admin
+  before_action :check_user_admin, only: [:new, :create, :edit, :update, :destroy]
   def index
     @workplaces = Workplace.all
   end

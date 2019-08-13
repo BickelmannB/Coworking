@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_09_093456) do
+ActiveRecord::Schema.define(version: 2019_08_13_153923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,12 +29,12 @@ ActiveRecord::Schema.define(version: 2019_08_09_093456) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.bigint "workplaces_id"
-    t.datetime "starting_date"
-    t.datetime "ending_date"
+    t.bigint "workplace_id"
+    t.date "starting_date"
+    t.date "ending_date"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
-    t.index ["workplaces_id"], name: "index_reservations_on_workplaces_id"
+    t.index ["workplace_id"], name: "index_reservations_on_workplace_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,5 +58,5 @@ ActiveRecord::Schema.define(version: 2019_08_09_093456) do
   end
 
   add_foreign_key "reservations", "users"
-  add_foreign_key "reservations", "workplaces", column: "workplaces_id"
+  add_foreign_key "reservations", "workplaces"
 end

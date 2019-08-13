@@ -10,6 +10,7 @@
           <th scope="col">Name</th>
           <th scope="col">Total places</th>
           <th scope="col">Available places</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -18,6 +19,9 @@
           <td> <%= link_to w.name.capitalize, workplace_path(w) %></td>
           <td><%= w.total_places %></td>
           <td><%= w.available_places %></td>
+          <% unless w.available_places.zero? %>
+          <td class="btn btn-success btn-flat"> <%= link_to "Book this Workplace!", controller: "reservations", action: "new", workplace_id: w.id %></td>
+          <% end %>
           <% end %>
         </tr>
       </tbody>

@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   get '/:token/contract', to: "requests#contract", as: 'contract'
   get '/:token/contract_acceptation', to: "requests#contract_acceptation", as: 'contract_acceptation'
   get '/request/accept/:token', to: "requests#accept", as: 'accept'
-  # get '/users/password/edit', to: "devise/passwords#edit", as: 'pass_edit'
   resources :requests, only: [:index, :new, :create, :show]
-  resources :workplaces, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+  resources :workplaces
+  resources :reservations
 
 end

@@ -1,0 +1,10 @@
+<div class="container text-center">
+<h1 class="pt-3 pb-5">Create a reservation for <%= @workplace.name %></h1>
+
+<%= simple_form_for @reservation do |f| %>
+  <%= f.input :starting_date, placeholder: '' %>
+  <%= f.input :ending_date, placeholder: '' %>
+  <input id="WorkplaceId" name="WorkplaceId" type="hidden" value=<%= "#{@workplace.id}" %>>
+  <button type="button" class="btn btn-outline-success"><%= f.button :submit %> </button>
+<% end %>
+</div>
