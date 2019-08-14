@@ -11,6 +11,7 @@ class Workplace < ApplicationRecord
     current_date = begin_date
     until current_date > end_date
       return false if reservations_count(current_date) == total_places
+
       current_date += 1
     end
     return true

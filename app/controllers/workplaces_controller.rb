@@ -49,6 +49,6 @@ class WorkplacesController < ApplicationController
   end
 
   def workplace_params
-    params.require(:workplace).permit(:name, :total_places, :available_places)
+    params.require(:workplace).permit(:name, :total_places)
   end
 end
