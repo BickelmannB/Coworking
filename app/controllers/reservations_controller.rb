@@ -12,14 +12,15 @@ class ReservationsController < ApplicationController
   def create
     @user = current_user
     @workplace = Workplace.find(params[:WorkplaceId])
-    if @workplace.available_places.zero?
+    @resa = Reservation.new(reservations_params)
+    unless @workplace.bookable?(@resa.starting_date, @resa.ending_date)
       redirect_to workplaces_path, alert: 'Sorry, workplace is full for this date'
     else
-      @reservation = Reservation.new(reservations_params)
-      @reservation.workplace = @workplace
-      @reservation.user = @user
-      if @reservation.save
-        redirect_to reservation_path(@reservation)
+      @resa.workplace = @workplace
+      @resa.user = @user
+      raise
+      if @resa.save
+        redirect_to reservation_path(@resa)
       else
         render :new
       end
