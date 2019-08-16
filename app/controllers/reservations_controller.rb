@@ -18,7 +18,6 @@ class ReservationsController < ApplicationController
     else
       @resa.workplace = @workplace
       @resa.user = @user
-      raise
       if @resa.save
         redirect_to reservation_path(@resa)
       else

@@ -17,7 +17,7 @@
         <tr>
           <td> <%= link_to w.name.capitalize, workplace_path(w) %></td>
           <td><%= w.total_places %></td>
-          <td class="btn btn-success btn-flat"> <%= link_to "Book this Workplace!", controller: "reservations", action: "new", workplace_id: w.id %></td>
+          <td><%= link_to "Book this Workplace!", controller: "reservations", action: "new", workplace_id: w.id %></td>
           <% end %>
         </tr>
       </tbody>
