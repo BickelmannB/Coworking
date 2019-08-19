@@ -3,24 +3,23 @@
   <p>Here is the list of available Workplaces</p>
 </div>
 <div class="container">
-  <div class="table-responsive">
-    <table class="table table-bordered text-center">
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Total places</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @workplaces.each do |w| %>
-        <tr>
-          <td> <%= link_to w.name.capitalize, workplace_path(w) %></td>
-          <td><%= w.total_places %></td>
-          <td><%= link_to "Book this Workplace!", controller: "reservations", action: "new", workplace_id: w.id %></td>
-          <% end %>
-        </tr>
-      </tbody>
-    </table>
+  <% @workplaces.in_groups_of(4, false).each do |group| %>
+  <div class="row">
+    <% group.each do |w| %>
+    <div class='col-md-3 m-1'>
+      <div class="card" style="width: 18rem;">
+        <div id="avatar-card">
+          <%= cl_image_tag w.photo, class: "card-img-top" %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title text-center"><strong><%= "#{w.name.capitalize}" %></strong></h5>
+          <p class="card-text text-center"><%= "#{w.description}" %></p>
+          <p class="card-text text-center">Total places : <%= "#{w.total_places}" %></p>
+          <p class="btn btn-success"><%= link_to "Book this Workplace!", controller: "reservations", action: "new", workplace_id: w.id %></p>
+        </div>
+      </div>
+    </div>
+    <% end %>
   </div>
+  <% end %>
 </div>

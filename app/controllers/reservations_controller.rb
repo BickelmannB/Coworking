@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
   before_action :check_user
   def index
-    @reservations = Reservation.all
+    @reservations = Reservation.where("user_id = :id", id: current_user)
   end
 
   def new

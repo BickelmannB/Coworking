@@ -2,8 +2,12 @@
 <h1 class="pt-3 pb-5">Create a Workplace</h1>
 
 <%= simple_form_for @workplace do |f| %>
-  <%= f.input :name, placeholder: 'Enter the name of Workspace' %>
+  <%= f.input :name, placeholder: 'Enter the name of Workplace' %>
+  <%= f.input :description, placeholder: 'Describe your Workplace' %>
   <%= f.input :total_places, placeholder: 'Enter the maximum capacity ' %>
+  <%= f.input :photo %>
+  <%= f.input :photo_cache, as: :hidden %>
+
   <button type="button" class="btn btn-outline-success"><%= f.button :submit %> </button>
 <% end %>
 </div>

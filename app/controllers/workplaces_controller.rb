@@ -10,7 +10,7 @@ class WorkplacesController < ApplicationController
 
   def create
     @workplace = Workplace.create(workplace_params)
-    redirect_to request_path(@workplace)
+    redirect_to workplace_path(@workplace)
   end
 
   def show
@@ -24,13 +24,13 @@ class WorkplacesController < ApplicationController
   def update
     @workplace = find
     @workplace.update(workplace_params)
-    redirect_to request_path(@workplace)
+    redirect_to workplace_path(@workplace)
   end
 
   def destroy
     @workplace = find
     @workplace.destroy
-    redirect_to requests_path
+    redirect_to workplaces_path
   end
 
   private
@@ -49,6 +49,6 @@ class WorkplacesController < ApplicationController
   end
 
   def workplace_params
-    params.require(:workplace).permit(:name, :total_places)
+    params.require(:workplace).permit(:name, :total_places, :description, :photo, :photo_cache)
   end
 end

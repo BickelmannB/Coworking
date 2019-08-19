@@ -18,6 +18,8 @@ gem 'sidekiq-failures', '~> 1.0'
 gem 'webpacker'
 gem 'email_validator'
 gem 'devise'
+gem 'cloudinary', '~> 1.9.1'
+gem 'carrierwave', '~> 1.3.1'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

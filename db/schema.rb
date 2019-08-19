@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_124723) do
+ActiveRecord::Schema.define(version: 2019_08_19_153333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 2019_08_14_124723) do
   create_table "workplaces", force: :cascade do |t|
     t.string "name"
     t.integer "total_places"
+    t.string "photo"
+    t.string "description"
   end
 
   add_foreign_key "reservations", "users"

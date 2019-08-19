@@ -1,5 +1,7 @@
 <div class="container text-center">
   <h1 class="pt-3 pb-5 font-weight-bold font-italic"><strong>Workplace</strong></h1>
+  <p><%= cl_image_tag @workplace.photo, height: 300, width: 400, crop: :fill %></p>
   <p> <strong>Name :</strong> <%= @workplace.name %> </p>
+  <p> <strong>Description :</strong> <%= @workplace.description %> </p>
   <p> <strong>Total places :</strong>  <%= @workplace.total_places %> </p>
 </div>
