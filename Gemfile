@@ -18,7 +18,6 @@ gem 'sidekiq-failures', '~> 1.0'
 gem 'webpacker'
 gem 'email_validator'
 gem 'devise'
-gem "simple_calendar", "~> 2.0"
 
 group :development do
   gem 'web-console', '>= 3.3.0'
