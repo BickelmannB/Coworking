@@ -1,7 +1,6 @@
 class Workplace < ApplicationRecord
   validates :name, presence: true
   validates :total_places, presence: true, numericality: { only_integer: true }
-  validates :available_places, presence: true, numericality: { only_integer: true }
 
   def reservations_count(date)
     Reservation.where("workplace_id = :id AND starting_date <= :date AND ending_date >= :date", id: id, date: date).count
