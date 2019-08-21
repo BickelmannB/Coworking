@@ -1,8 +1,14 @@
 <div class="container text-center">
-<h1 class="pt-3 pb-5">Create a reservation for <%= @workplace.name %></h1>
+<h1 class="pt-3 pb-5">Reservation for<strong> <%= @workplace.name.capitalize %></strong></h1>
+        <div class="container text-center" id="avatar-card" style="width: 20rem; height: 20rem; d-flex">
+          <%= cl_image_tag @workplace.photo, class: "card-img-top" %>
+        </div>
 
 <%= simple_form_for @reservation do |f| %>
-
+<label><strong>Starting date</strong></label><br>
+<input type="date" name="reservation[starting_date]" data-provide='datepicker' ><br><br>
+<label><strong>Ending date</strong></label><br>
+<input type="date" name="reservation[ending_date]" data-provide='datepicker' ><br><br>
   <input id="WorkplaceId" name="WorkplaceId" type="hidden" value=<%= "#{@workplace.id}" %>>
   <button type="button" class="btn btn-outline-success"><%= f.button :submit %> </button>
 <% end %>

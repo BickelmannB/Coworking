@@ -1,7 +1,7 @@
 class Workplace < ApplicationRecord
   validates :name, presence: true
   validates :total_places, presence: true, numericality: { only_integer: true }
-  validates :description, presence: true
+  validates :description, presence: true,  length: { maximum: 70 }
   mount_uploader :photo, PhotoUploader
 
   def reservations_count(date)

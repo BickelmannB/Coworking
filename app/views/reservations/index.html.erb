@@ -1,6 +1,6 @@
 <div class="container text-center">
   <h1>Reservations</h1>
-  <p>Here is the list of reservations</p>
+  <p>Here is the list of your reservations</p>
 </div>
 <div class="container">
   <div class="table-responsive">
@@ -8,7 +8,6 @@
       <thead>
         <tr>
           <th scope="col">Workplace</th>
-          <th scope="col">User</th>
           <th scope="col">Starting date</th>
           <th scope="col">Ending date</th>
         </tr>
@@ -17,9 +16,8 @@
         <% @reservations.each do |r| %>
         <tr>
           <td><%= link_to r.workplace.name, reservation_path(r) %></td>
-          <td><%= r.user.email %></td>
           <td><%= r.starting_date %></td>
-          <td><%= r.ending_date %></td> %>
+          <td><%= r.ending_date %></td>
           <% end %>
         </tr>
       </tbody>
