@@ -4,7 +4,7 @@
 <%= simple_form_for @workplace do |f| %>
   <%= f.input :name, placeholder: 'Enter the name of Workspace' %>
   <%= f.input :total_places, placeholder: 'Enter the maximum capacity ' %>
-  <%= f.input :available_places, placeholder: 'How many places are available?' %>
+  <%= f.input :description, placeholder: 'Tell us more about your place ' %>
   <button type="button" class="btn btn-outline-success"><%= f.button :submit %> </button>
 <% end %>
 </div>

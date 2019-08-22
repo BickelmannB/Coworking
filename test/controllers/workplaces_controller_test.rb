@@ -1,11 +1,12 @@
 require 'test_helper'
 
 class WorkplacesControllerTest < ActionDispatch::IntegrationTest
-
+include Devise::Test::IntegrationHelpers
+  fixtures :users
   # Setup
 
-  setup do
-    users(:brice)
+  def setup
+    sign_in users(:brice)
   end
 
   # Validations tests
@@ -52,14 +53,12 @@ class WorkplacesControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get workplaces_url
     assert_response :success
-    assert Worlplace.all
+    assert Workplace.all
     assert_response :success
   end
 
   test "should get new" do
     get new_workplace_url
-    assert_response :success
-    assert Workplace.new
     assert_response :success
   end
 
@@ -74,14 +73,12 @@ class WorkplacesControllerTest < ActionDispatch::IntegrationTest
     workplace = Workplace.new(name: "tot", total_places: 4, photo: "my pic", description: "dodo")
     workplace.save
     get edit_workplace_url(workplace)
-    assert_redirected_to(edit_workplace_url(workplace))
+    assert_response :success
   end
 
 
   test "should destroy" do
-    assert workplace = Workplace.create(name: "tot", total_places: 4, photo: "my pic", description: "dodo")
-    assert_response :success
+    workplace = Workplace.create(name: "tot", total_places: 4, photo: "my pic", description: "dodo")
     assert workplace.destroy
-    assert_not workplace
   end
 end
