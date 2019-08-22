@@ -1,0 +1,11 @@
+david:
+  email: david@david
+  encrypted_password: password
+  admin: false
+  already_logged: true
+
+brice:
+  email: brice@brice
+  encrypted_password: password
+  admin: true
+  already_logged: true
