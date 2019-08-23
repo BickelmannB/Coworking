@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ReservationsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
-fixtures :users, :workplaces
+  fixtures :users, :workplaces
   # Setup
 
   def setup
@@ -20,27 +20,20 @@ fixtures :users, :workplaces
   end
 
   test "should get new" do
-    @workplace = Workplace.new(name: "toto", total_places: 10, description: "lol")
-    @workplace.save
     get new_reservation_url(workplace_id: @workplace)
     assert_response :success
   end
 
   test "should get create" do
-    @resa = Reservation.new(starting_date: Date.today, ending_date: Date.today)
-    @resa.workplace = @workplace
-    @resa.user = @user
-    @resa.save
-    post reservations_url
-    assert_response :success
+   post reservations_url, params: { reservation: { workplace_id: @workplace, user_id: @user, starting_date: Date.today, ending_date: Date.today } }
+   get reservation_url(Reservation.last)
+   assert_response :success
   end
 
   test "should get edit" do
-    @resa = Reservation.new(starting_date: Date.today, ending_date: Date.today)
-    @resa.workplace = @workplace
-    @resa.user = @user
-    @resa.save
-    get edit_reservation_url(@resa)
+    @resa = Reservation.create(workplace: @workplace, user: @user, starting_date: Date.today, ending_date: Date.today)
+    byebug
+    get edit_reservation_url(@resa.id)
     assert_response :success
   end
 
@@ -49,13 +42,18 @@ fixtures :users, :workplaces
     @resa.workplace = @workplace
     @resa.user = @user
     @resa.save
-    put reservation_url(@resa)
+    put reservation_url(@resa), params: { reservation: { workplace: @workplace, user: @user, starting_date: Date.today, ending_date: Date.today } }
+    assert_response :redirect
+    follow_redirect!
+    get reservation_url(@resa)
     assert_response :success
   end
 
   test "should get show" do
-    byebug
-    @resa = Reservation.create!(starting_date: Date.today, ending_date: Date.today, user: @user, workplace: @worplace)
+    @resa = Reservation.new(starting_date: Date.today, ending_date: Date.today)
+    @resa.user = @user
+    @resa.workplace = @workplace
+    @resa.save
     get reservation_url(@resa)
     assert_response :success
   end
@@ -65,13 +63,10 @@ fixtures :users, :workplaces
     @resa.workplace = @workplace
     @resa.user = @user
     @resa.save
-    @resa.destroy
-    assert_not @resa
-
+    assert @resa.destroy
   end
 
   # Validations tests
-
 
   # Methods tests
 end

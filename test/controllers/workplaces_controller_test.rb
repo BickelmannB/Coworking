@@ -62,6 +62,12 @@ include Devise::Test::IntegrationHelpers
     assert_response :success
   end
 
+  test "shouled get create" do
+   post workplaces_url, params: { workplace: { name: "place", total_places: 9, photo: "pic", description: "best place ever" } }
+   get workplace_url(Workplace.last)
+   assert_response :success
+  end
+
   test "should get show" do
     workplace = Workplace.new(name: "tot", total_places: 4, photo: "my pic", description: "dodo")
     workplace.save
