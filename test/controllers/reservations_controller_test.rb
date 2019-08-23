@@ -8,6 +8,7 @@ fixtures :users, :workplaces
   def setup
     sign_in users(:brice)
     @user = users(:brice)
+    current_user = @user
     @workplace = workplaces(:place)
   end
 
@@ -21,38 +22,52 @@ fixtures :users, :workplaces
   test "should get new" do
     @workplace = Workplace.new(name: "toto", total_places: 10, description: "lol")
     @workplace.save
-    get new_reservation_url(@workplace.id)
+    get new_reservation_url(workplace_id: @workplace)
     assert_response :success
   end
 
   test "should get create" do
+    @resa = Reservation.new(starting_date: Date.today, ending_date: Date.today)
+    @resa.workplace = @workplace
+    @resa.user = @user
+    @resa.save
     post reservations_url
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_reservation_url
-    assert_response :success
-  end
-
-  test "should get update" do
-    put reservation_url
-    assert_response :success
-  end
-
-  test "should get show" do
     @resa = Reservation.new(starting_date: Date.today, ending_date: Date.today)
     @resa.workplace = @workplace
     @resa.user = @user
     @resa.save
+    get edit_reservation_url(@resa)
+    assert_response :success
+  end
+
+  test "should get update" do
+    @resa = Reservation.new(starting_date: Date.today, ending_date: Date.today)
+    @resa.workplace = @workplace
+    @resa.user = @user
+    @resa.save
+    put reservation_url(@resa)
+    assert_response :success
+  end
+
+  test "should get show" do
+    byebug
+    @resa = Reservation.create!(starting_date: Date.today, ending_date: Date.today, user: @user, workplace: @worplace)
     get reservation_url(@resa)
     assert_response :success
   end
 
   test "should get destroy" do
+    @resa = Reservation.new(starting_date: Date.today, ending_date: Date.today)
+    @resa.workplace = @workplace
+    @resa.user = @user
+    @resa.save
+    @resa.destroy
+    assert_not @resa
 
-    destroy reservation_path
-    assert_response :success
   end
 
   # Validations tests
