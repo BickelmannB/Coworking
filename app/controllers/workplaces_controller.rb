@@ -15,6 +15,7 @@ class WorkplacesController < ApplicationController
 
   def show
     @workplace = find
+    @reservations = Reservation.where("workplace_id = :id", id: @workplace.id)
   end
 
   def edit

@@ -25,15 +25,17 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get create" do
-   post reservations_url, params: { reservation: { workplace_id: @workplace, user_id: @user, starting_date: Date.today, ending_date: Date.today } }
+   post reservations_url, params: { reservation: { starting_date: Date.today, ending_date: Date.today }, WorkplaceId: @workplace.id }
+   assert_response :redirect
+   follow_redirect!
    get reservation_url(Reservation.last)
    assert_response :success
   end
 
   test "should get edit" do
-    @resa = Reservation.create(workplace: @workplace, user: @user, starting_date: Date.today, ending_date: Date.today)
-    byebug
-    get edit_reservation_url(@resa.id)
+    @resa = Reservation.new(workplace: @workplace, user: @user, starting_date: Date.today, ending_date: Date.today)
+    @resa.save
+    get edit_reservation_url(@resa)
     assert_response :success
   end
 

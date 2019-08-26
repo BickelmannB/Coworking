@@ -1,10 +1,13 @@
 <div class="container text-center">
-<h1 class="pt-3 pb-5">Edit a Reservation</h1>
+  <h1 class="pt-3 pb-5 font-weight-bold font-italic"><strong>Reservation for <%= @reservation.workplace.name %></strong></h1>
+  <p><%= cl_image_tag @reservation.workplace.photo, height: 300, width: 400, crop: :fill %></p>
 
-<%= simple_form_for @workplace do |f| %>
-  <%= f.input :name, placeholder: 'Enter the name of Workspace' %>
-  <%= f.input :total_places, placeholder: 'Enter the maximum capacity ' %>
-  <%= f.input :available_places, placeholder: 'How many places are available?' %>
+<%= simple_form_for @reservation do |f| %>
+<label><strong>Starting date</strong></label><br>
+<input type="date" name="reservation[starting_date]" data-provide='datepicker' ><br><br>
+<label><strong>Ending date</strong></label><br>
+<input type="date" name="reservation[ending_date]" data-provide='datepicker' ><br><br>
+  <input id="WorkplaceId" name="WorkplaceId" type="hidden" value=<%= "#{@reservation.workplace.id}" %>>
   <button type="button" class="btn btn-outline-success"><%= f.button :submit %> </button>
 <% end %>
 </div>

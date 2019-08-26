@@ -1,7 +1,23 @@
-<div class="container text-center">
-  <h1 class="pt-3 pb-5 font-weight-bold font-italic"><strong>Workplace</strong></h1>
-  <p><%= cl_image_tag @workplace.photo, height: 300, width: 400, crop: :fill %></p>
-  <p> <strong>Name :</strong> <%= @workplace.name %> </p>
-  <p> <strong>Description :</strong> <%= @workplace.description %> </p>
-  <p> <strong>Total places :</strong>  <%= @workplace.total_places %> </p>
-</div>
+<head>
+  <link rel="app/assets/stylesheet" href="pages/_show.scss">
+</head>
+<body>
+  <div class="container text-center">
+    <h1 class="pt-3 pb-5 font-weight-bold font-italic"><strong>Workplace</strong></h1>
+    <p><%= cl_image_tag @workplace.photo, height: 300, width: 400, crop: :fill %></p>
+    <p> <strong>Name :</strong> <%= @workplace.name %> </p>
+    <p> <strong>Description :</strong> <%= @workplace.description %> </p>
+    <p> <strong>Total places :</strong>  <%= @workplace.total_places %> </p>
+  </div>
+  <div class="container">
+    <%= month_calendar events: @reservations do |date, reservations, message | %>
+    <%= date.day %>
+    <% reservations.each do |reservation | %>
+    <div>
+     <% message = "#{reservation.workplace.total_places.to_i - @workplace.reservations_count(date).to_i}" %>
+    <% end %>
+    </div>
+    <%="#{message} places left" %>
+    <% end %>
+  </div>
+</body>
