@@ -11,13 +11,19 @@
   </div>
   <div class="container">
     <%= month_calendar events: @reservations do |date, reservations, message | %>
-    <%= date.day %>
-    <% reservations.each do |reservation | %>
+    <%= date %><br>
+    <% reservations = @workplace.reservations_count(date) %>
+    <% message = " #{@workplace.total_places.to_i - reservations.to_i} places left " %>
     <div>
-     <% message = "#{reservation.workplace.total_places.to_i - @workplace.reservations_count(date).to_i}" %>
-    <% end %>
+
     </div>
-    <%="#{message} places left" %>
+    <% if message == " 0 places left " %>
+    <div class="day_full">
+      <strong><%= " Workplace full !" %></strong>
+    </div>
+    <% else %>
+    <strong><%=" #{message}  " %></strong>
+    <% end %>
     <% end %>
   </div>
 </body>
