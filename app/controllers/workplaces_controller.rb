@@ -2,12 +2,9 @@ class WorkplacesController < ApplicationController
   before_action :check_user_admin, only: [:new, :create, :edit, :update, :destroy]
   def index
     @workplaces = Workplace.all
-    @workplaces = Workplace.where("description ILIKE ?", "%#{params[:search]}%") if params[:search].present?
-    if params[:tri].present? && params[:tri] == "desc"
-      @workplaces = Workplace.all.order(total_places: :desc)
-    elsif params[:tri].present? && params[:tri] == "asc"
-      @workplaces = Workplace.all.order(total_places: :asc)
-    end
+    @workplaces = @workplaces.where("description ILIKE ?", "%#{params[:search]}%") if params[:search].present?
+    @workplaces = @workplaces.order(total_places: :desc) if params[:tri].present? && params[:tri] == "desc"
+    @workplaces = @workplaces.order(total_places: :asc) if params[:tri].present? && params[:tri] == "asc"
   end
 
   def new

@@ -1,38 +1,48 @@
-<div class="container text-center">
-  <h1>Workplaces</h1>
-  <p>Here is the list of available Workplaces</p>
-</div>
-<div class="container text-center"> <%= simple_form_for :search, url: workplaces_path, method: :get do |f| %>
-  <div class="search-form-control form-group">
-    <input class="form-control string required" type="text" name="search" id="search" value="<%= params[:search] %>" placeholder="Search for a Workplace" />
-    <button name="button" type="submit" class="btn btn-flat btn-success">
-    <i class="fas fa-search"></i> Search
-    </button>
-  </div>
- <select name="tri">
-    <option value="asc">asc</option>
-    <option value="desc">desc</option>
-  </select>
-  <% end %>
-  <div class="container text-center">
-    <% @workplaces.in_groups_of(3, false).each do |group| %>
-    <div class="row d-flex justify-content-center">
-      <% group.each do |w| %>
-      <div class='col-md-3 m-4'>
-        <div class="card border-success" style="width: 16rem; height: 28rem;">
-          <div id="avatar-card">
-            <%= cl_image_tag w.photo,
-            width: 254, height: 200, crop: :fill %>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title text-center"><strong><%=link_to "#{w.name.capitalize}", workplace_path(w) %></strong></h5>
-            <p class="card-text text-center"><%= "#{w.description}" %></p>
-            <p class="card-text text-center">Total places : <%= "#{w.total_places}" %></p>
-            <p class="btn btn-success"><%= link_to "Book this Workplace!", controller: "reservations", action: "new", workplace_id: w.id %></p>
-          </div>
-        </div>
-      </div>
-      <% end %>
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <div class="container text-center">
+      <h1>Workplaces</h1>
+      <p>Here is the list of available Workplaces</p>
     </div>
-    <% end %>
-  </div>
+    <div class="container text-center"> <%= simple_form_for :search, url: workplaces_path, method: :get do |f| %>
+      <div class="search-form-control form-group">
+        <input class="form-control string required" type="text" name="search" id="search" value="<%= params[:search] %>" placeholder="Search for a Workplace" />
+        <button name="button" type="submit" class="btn btn-flat btn-success">
+        <i class="fas fa-search"></i> Search
+        </button>
+      </div>
+      <label for="tri">Sort results by total places :</label>
+      <select name="tri" id="tri" class="btn btn-flat btn-success">
+        <option value="asc">Min</option>
+        <option value="desc">Max</option>
+      </select>
+      <% end %>
+      <div class="container text-center">
+        <% @workplaces.in_groups_of(3, false).each do |group| %>
+        <div class="row d-flex justify-content-center">
+          <% group.each do |w| %>
+          <div class='col-md-3 m-4'>
+            <div class="card border-success" style="width: 16rem; height: 28rem;">
+              <div id="avatar-card">
+                <%= cl_image_tag w.photo,
+                width: 254, height: 200, crop: :fill %>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-center"><strong><%=link_to "#{w.name.capitalize}", workplace_path(w) %></strong></h5>
+                <p class="card-text text-center"><%= "#{w.description}" %></p>
+                <p class="card-text text-center">Total places : <%= "#{w.total_places}" %></p>
+                <p class="btn btn-success"><%= link_to "Book this Workplace!", controller: "reservations", action: "new", workplace_id: w.id %></p>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <script src="javascript/index.js"></script>
+  </body>
+</html>
