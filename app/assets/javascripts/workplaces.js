@@ -1,13 +1,28 @@
-// var tri = $('#tri');
-// tri.change(function() {
-// tri.closest("form").submit();
-// ;})
 
-// const tri = document.getElementById("tri");
-// tri.addEventListener("change", function() {
-// $(this).closest("form").submit();
+// ---------- Event change on select for sort results -------
+
+let tri = document.getElementById("tri");
+if (tri) {
+tri.addEventListener("change", function() {
+$(this).closest("form").submit();
+});
+tri.addEventListener("mouseover", function() {
+$(this).show;
+});
+  tri.addEventListener("mouseout", function() {
+$(this).hide;
+});
+};
+
+
+
+// ---------------- OR -----------------
+
+// $("#tri").on("change", function(){
+//   $(this).closest("form").submit();
 // });
 
-$("#tri").on("change", function(){
-  $(this).closest("form").submit();
-});
+// ------------------------------------
+
+
+
