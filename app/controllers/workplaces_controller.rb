@@ -1,8 +1,10 @@
 class WorkplacesController < ApplicationController
   before_action :check_user_admin, only: [:new, :create, :edit, :update, :destroy]
+  before_action :cookie_user
+
   def index
     @workplaces = Workplace.all
-    @workplaces = @workplaces.where("description ILIKE ?", "%#{params[:search]}%") if params[:search].present?
+    @workplaces = @workplaces.where("description ILIKE ?", "%#{cookies[:search]}%") if cookies[:search].present? && params[:search] != ""
     @workplaces = @workplaces.order(total_places: :desc) if params[:tri].present? && params[:tri] == "desc"
     @workplaces = @workplaces.order(total_places: :asc) if params[:tri].present? && params[:tri] == "asc"
   end
@@ -38,6 +40,11 @@ class WorkplacesController < ApplicationController
   end
 
   private
+
+  def cookie_user
+    cookies[:search] = { value: params[:search].to_s, expires: 24.hour } if params[:search].present?
+    return
+  end
 
   def check_user_admin
     if current_user &.admin?

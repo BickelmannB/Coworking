@@ -9,7 +9,7 @@
     </div>
     <div class="container text-center"> <%= simple_form_for :search, url: workplaces_path, method: :get do |f| %>
       <div class="search-form-control form-group">
-        <input class="form-control string required" type="text" name="search" id="search" value="<%= params[:search] %>" placeholder="Search for a Workplace" />
+        <input class="form-control string required" type="text" name="search" id="search" value="<%= cookies[:search] %>" placeholder="Search for a Workplace" />
         <button name="button" type="submit" class="btn btn-flat btn-success">
         <i class="fas fa-search"></i> Search
         </button>
