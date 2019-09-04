@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   resources :requests, only: [:index, :new, :create, :show]
   resources :workplaces
   resources :reservations
+  resources :users, only: [:edit, :update, :show]
 
 end

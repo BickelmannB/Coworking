@@ -36,8 +36,7 @@
           <li class="nav-item border-right">
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
           </li>
-          <li class="nav-item">
-          <%= current_user.email %> </li>
+          <li class="nav-item"><%= link_to current_user.email, edit_user_path(current_user) %></li>
           <% else %>
           <li class="nav-item border-right">
             <%= link_to "Waiting list", "/requests", class: "nav-link" %>
