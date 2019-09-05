@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   resources :workplaces
   resources :reservations
   resources :users, only: [:edit, :update, :show]
-
+  resources :apis, only: [:index]
 end
