@@ -1,9 +1,5 @@
-<%= form_for(@adresse, method: :get) do |f| %>
-
-  <div class="field" name="properties[label]" id="properties[label]">
-    <%= f.label :query %><br>
-    <%= f.text_field :query %>
-  </div>
-
+<div class="form">
+  <input name="query" id="query" />
 <button type="submit"> submit </button>
-<% end %>
+</div>
+<%= @response.body %>
