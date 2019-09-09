@@ -13,7 +13,13 @@
   required: false,
   input_html: { autocomplete: "current-password" } %>
 </div>
-        <input class="form-control string required" type="text" name="query" id="query" placeholder="Search for address" />
+        <input id="query" placeholder="Search for address" />
+        <label for="address_zip">Zip code</label>
+        <input id="address_zip"/>
+        <label for="address_n"> Street Number</label>
+        <input id="address_n"/>
+        <label for="address_street">Street</label>
+        <input id="address_street"/>
 <div class="form-actions">
   <%= f.button :submit, "Update" %>
 </div>

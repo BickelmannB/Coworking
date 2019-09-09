@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/:token/contract', to: "requests#contract", as: 'contract'
   get '/:token/contract_acceptation', to: "requests#contract_acceptation", as: 'contract_acceptation'
   get '/request/accept/:token', to: "requests#accept", as: 'accept'
+  get '/users/user_adress', to: "users#user_adress"
   resources :requests, only: [:index, :new, :create, :show]
   resources :workplaces
   resources :reservations

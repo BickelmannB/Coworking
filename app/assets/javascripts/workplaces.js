@@ -1,7 +1,7 @@
 
 // ---------- Event change on select for sort results -------
 
-let tri = document.getElementById("tri");
+const tri = document.getElementById("tri");
 if (tri) {
 tri.addEventListener("change", function() {
 $(this).closest("form").submit();
