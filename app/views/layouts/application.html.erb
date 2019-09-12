@@ -9,6 +9,8 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
     <%= favicon_link_tag asset_path('cw.png') %>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.css' rel='stylesheet' />
     <%= render 'shared/flashes' %>
   </head>
   <body>
@@ -32,35 +34,35 @@
           <%= link_to "Create a workplace", new_workplace_path, class: "nav-link" %> </li>
           <li class="nav-item border-right">
             <%= link_to "My reservations", reservations_path, method: :get, class: "nav-link" %>
-          <li class="nav-item border-right">
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
-          </li>
-          <li class="nav-item"><%= link_to current_user.email, edit_user_path(current_user) %></li>
-          <% else %>
-          <li class="nav-item border-right">
-            <%= link_to "Waiting list", "/requests", class: "nav-link" %>
-          </li>
-          <li class="nav-item border-right">
-            <%= link_to "Book a workplace", "/requests/new", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-          <% end %>
-        </ul>
+            <li class="nav-item border-right">
+              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+            </li>
+            <li class="nav-item"><%= link_to current_user.email, edit_user_path(current_user) %></li>
+            <% else %>
+            <li class="nav-item border-right">
+              <%= link_to "Waiting list", "/requests", class: "nav-link" %>
+            </li>
+            <li class="nav-item border-right">
+              <%= link_to "Book a workplace", "/requests/new", class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
-    </div>
-    <%= yield %>
-    <div class="footer">
-      <div class="footer-links">
-        <a href="#"><i class="fab fa-github"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
+      <%= yield %>
+      <div class="footer">
+        <div class="footer-links">
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
       </div>
-    </div>
-    <%= javascript_include_tag 'application' %>
-    <%= javascript_pack_tag 'application' %>
-  </body>
-</html>
+      <%= javascript_include_tag 'application' %>
+      <%= javascript_pack_tag 'application' %>
+    </body>
+  </html>
