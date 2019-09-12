@@ -38,10 +38,10 @@
 //     });
 // });
 
-var service_url = "https://api-adresse.data.gouv.fr/search/";
+var service_url = "/users/user_adress";
 $('#searchAdresse').autocomplete({
     source: function (request, response) {
-        $.getJSON(service_url + "?q=" + request.term, function (result) {
+        $.getJSON(service_url + "?query=" + request.term, function (result) {
             response($.map(result.features, function(item)
             {
                 return { value: item.properties.label,

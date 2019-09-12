@@ -7,7 +7,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    # user_adress
     @user.address_n = params[:address_n]
     @user.address_zip = params[:address_zip]
     @user.address_street = params[:address_street]
@@ -28,15 +27,15 @@ class UsersController < ApplicationController
     end
   end
 
-  # def user_adress
-  #   uri = URI("https://api-adresse.data.gouv.fr/search/?q=#{params[:query]}")
-  #   Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-  #     request = Net::HTTP::Get.new uri
-  #     @response = http.request request # Net::HTTPResponse object
-  #   end
-  #   @pjson = JSON.parse(@response.body)
-  #   # render json: @pjson["features"]
-  # end
+  def user_adress
+    uri = URI("https://api-adresse.data.gouv.fr/search/?q=#{params[:query]}")
+    Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+      request = Net::HTTP::Get.new uri
+      @response = http.request request # Net::HTTPResponse object
+    end
+    @pjson = JSON.parse(@response.body)
+    render json: @pjson
+  end
 
   private
 
