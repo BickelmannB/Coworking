@@ -56,6 +56,7 @@ $('#searchAdresse').autocomplete({
         $("#address_zip").val( ui.item.data.postcode );
         $("#address_street").val( ui.item.data.street );
         $("#address_n").val( ui.item.data.housenumber);
+        $("#address_city").val( ui.item.data.city);
         // $('#content').find("input[name*='appartement_etage_couloir']").val('');
         // $('#content').find("input[name*='complement_identification_bat']").val('');
         // if (ui.item.data.street && ui.item.data.housenumber) {

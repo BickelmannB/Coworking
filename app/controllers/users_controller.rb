@@ -11,6 +11,8 @@ class UsersController < ApplicationController
     @user.address_n = params[:address_n]
     @user.address_zip = params[:address_zip]
     @user.address_street = params[:address_street]
+    @user.address_city = params[:address_city]
+    @user.address = "#{params[:address_n]}" + " " + "#{params[:address_street]}" + " " + "#{params[:address_zip]}" + " " + "#{params[:address_city]}"
     @user.update(user_params)
     redirect_to user_path(@user)
   end
