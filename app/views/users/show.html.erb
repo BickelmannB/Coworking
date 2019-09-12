@@ -3,3 +3,11 @@
   <p> <strong>Email :</strong> <%= @user.email %> </p>
   <p> <strong>Address :</strong>  <%="#{ @user.address_n} "+ "#{@user.address_street}"%> </p>
 </div>
+
+<div class="container"
+  id="map"
+  style="width: 50%;
+  height: 300px"
+  data-markers="<%= @marker.to_json %>"
+  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+></div>
