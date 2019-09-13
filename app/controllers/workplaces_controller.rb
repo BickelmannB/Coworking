@@ -9,6 +9,7 @@ class WorkplacesController < ApplicationController
     @workplaces = @workplaces.order(total_places: :asc) if params[:tri].present? && params[:tri] == "asc"
   end
 
+
   def new
     @workplace = Workplace.new
   end

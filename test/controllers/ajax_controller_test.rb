@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class ApisControllerTest < ActionDispatch::IntegrationTest
+class AjaxControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get apis_index_url
+    get ajax_index_url
     assert_response :success
   end
 

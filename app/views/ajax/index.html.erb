@@ -1,0 +1,22 @@
+<div id="wp" class="container text-center">
+        <% @workplaces.in_groups_of(3, false).each do |group| %>
+        <div class="row d-flex justify-content-center">
+          <% group.each do |w| %>
+          <div class='col-md-3 m-4'>
+            <div class="card border-success" style="width: 16rem; height: 28rem;">
+              <div id="avatar-card">
+                <%= cl_image_tag w.photo,
+                width: 254, height: 200, crop: :fill %>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-center"><strong><%=link_to "#{w.name.capitalize}", workplace_path(w) %></strong></h5>
+                <p class="card-text text-center"><%= "#{w.description}" %></p>
+                <p class="card-text text-center">Total places : <%= "#{w.total_places}" %></p>
+                <p class="btn btn-success"><%= link_to "Book this Workplace!", controller: "reservations", action: "new", workplace_id: w.id %></p>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        <% end %>
+      </div>
