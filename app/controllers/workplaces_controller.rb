@@ -3,12 +3,13 @@ class WorkplacesController < ApplicationController
   before_action :cookie_user
 
   def index
-    @workplaces = Workplace.all
-    @workplaces = @workplaces.where("description ILIKE ?", "%#{cookies[:search]}%") if cookies[:search].present? && params[:search] != ""
-    @workplaces = @workplaces.order(total_places: :desc) if params[:tri].present? && params[:tri] == "desc"
-    @workplaces = @workplaces.order(total_places: :asc) if params[:tri].present? && params[:tri] == "asc"
+    workplaces
   end
 
+  def load_wp
+    workplaces
+    render layout: false
+  end
 
   def new
     @workplace = Workplace.new
@@ -41,6 +42,13 @@ class WorkplacesController < ApplicationController
   end
 
   private
+
+  def workplaces
+    @workplaces = Workplace.all
+    @workplaces = @workplaces.where("description ILIKE ?", "%#{cookies[:search]}%") if cookies[:search].present? && params[:search] != ""
+    @workplaces = @workplaces.order(total_places: :desc) if params[:tri].present? && params[:tri] == "desc"
+    @workplaces = @workplaces.order(total_places: :asc) if params[:tri].present? && params[:tri] == "asc"
+  end
 
   def cookie_user
     cookies[:search] = { value: params[:search].to_s, expires: 24.hour } if params[:search].present?

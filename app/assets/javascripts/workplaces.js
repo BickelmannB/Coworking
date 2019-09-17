@@ -14,6 +14,15 @@ $(this).hide;
 });
 };
 
+url = "workplaces/load_wp";
+$("#form").on("submit", function(ev) {
+              ev.preventDefault();
+            ev.stopImmediatePropagation();
+            ev.stopPropagation();
+var tri = $("#tri").val();
+var search = $("#search").val();
+$("#wp").load(url + "?utf8=✓&search=" + search + "&tri=" + tri);
+});
 // ---------------- OR -----------------
 
 // $("#tri").on("change", function(){
