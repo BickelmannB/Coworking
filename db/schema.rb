@@ -29,10 +29,10 @@ ActiveRecord::Schema.define(version: 2019_09_12_091004) do
   end
 
   create_table "reservations", force: :cascade do |t|
+    t.bigint "user_id"
     t.bigint "workplace_id"
     t.date "starting_date"
     t.date "ending_date"
-    t.bigint "user_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
     t.index ["workplace_id"], name: "index_reservations_on_workplace_id"
   end

@@ -6,10 +6,6 @@ class WorkplacesController < ApplicationController
     workplaces
   end
 
-  def load_wp
-    workplaces
-    render layout: false
-  end
 
   def new
     @workplace = Workplace.new
@@ -39,6 +35,31 @@ class WorkplacesController < ApplicationController
     @workplace = find
     @workplace.destroy
     redirect_to workplaces_path
+  end
+
+  def load_wp
+    workplaces
+    render layout: false
+  end
+
+  def export_files
+    @workplaces = Workplace.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @workplaces }
+      format.xlsx {
+        xlsx_package = @workplaces.to_xlsx
+        begin
+          temp = Tempfile.new("workplaces.xlsx")
+          xlsx_package.serialize temp.path
+          send_file temp.path, filename: "workplaces.xlsx", type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        ensure
+          temp.close
+          temp.unlink
+        end
+      }
+    end
   end
 
   private

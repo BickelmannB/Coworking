@@ -1,4 +1,5 @@
 class Workplace < ApplicationRecord
+  acts_as_xlsx columns: [:name, :total_places, :description, :created_at]
   validates :name, presence: true
   validates :total_places, presence: true, numericality: { only_integer: true }
   validates :description, presence: true,  length: { maximum: 70 }
