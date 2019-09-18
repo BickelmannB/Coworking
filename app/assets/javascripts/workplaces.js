@@ -23,6 +23,11 @@ var tri = $("#tri").val();
 var search = $("#search").val();
 $("#wp").load(url + "?utf8=✓&search=" + search + "&tri=" + tri);
 });
+
+  $( function() {
+    $( "#resastart" ).datepicker();
+    $( "#resaend" ).datepicker();
+  } );
 // ---------------- OR -----------------
 
 // $("#tri").on("change", function(){

@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'workplaces/load_wp', to: "workplaces#load_wp", as: 'load'
-  get 'workplaces/export_files', to: "workplaces#export_files", as: 'export'
   devise_for :users
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -11,9 +9,10 @@ Rails.application.routes.draw do
   get '/:token/contract_acceptation', to: "requests#contract_acceptation", as: 'contract_acceptation'
   get '/request/accept/:token', to: "requests#accept", as: 'accept'
   get '/users/user_adress', to: "users#user_adress"
+  get 'workplaces/load_wp', to: "workplaces#load_wp", as: 'load'
+  get 'workplaces/export_files', to: "workplaces#export_files", as: 'export'
   resources :requests, only: [:index, :new, :create, :show]
   resources :workplaces
   resources :reservations
   resources :users, only: [:edit, :update, :show]
-  resources :apis, only: [:index]
 end

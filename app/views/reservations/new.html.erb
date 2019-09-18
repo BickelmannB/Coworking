@@ -6,9 +6,9 @@
 
 <%= simple_form_for @reservation do |f| %>
 <label><strong>Starting date</strong></label><br>
-<input type="date" name="reservation[starting_date]" data-provide='datepicker' ><br><br>
+<input id="resastart" type="date" name="reservation[starting_date]"><br><br>
 <label><strong>Ending date</strong></label><br>
-<input type="date" name="reservation[ending_date]" data-provide='datepicker' ><br><br>
+<input id="resaend" type="date" name="reservation[ending_date]"><br><br>
   <input id="WorkplaceId" name="WorkplaceId" type="hidden" value=<%= "#{@workplace.id}" %>>
   <button type="button" class="btn btn-outline-success"><%= f.button :submit %> </button>
 <% end %>

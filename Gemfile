@@ -23,8 +23,6 @@ gem 'acts_as_xlsx'
 gem 'devise'
 gem 'cloudinary', '~> 1.9.1'
 gem 'carrierwave', '~> 1.3.1'
-gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
-                              :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 gem "simple_calendar", "~> 2.0"
 gem 'rails-jquery-autocomplete'
 gem 'geocoder'
