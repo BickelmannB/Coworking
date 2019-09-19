@@ -44,22 +44,10 @@ class WorkplacesController < ApplicationController
 
   def export_files
     @workplaces = Workplace.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @workplaces }
-      format.xlsx {
-        xlsx_package = @workplaces.to_xlsx
-        begin
-          temp = Tempfile.new("workplaces.xlsx")
-          xlsx_package.serialize temp.path
-          send_file temp.path, filename: "workplaces.xlsx", type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        ensure
-          temp.close
-          temp.unlink
-        end
-      }
-    end
+    send_data(@workplaces.to_xlsx.to_stream.read, filename: 'workplace.xlsx',
+                                                  disposition: 'attachment',
+                                                  encoding: 'UTF-8',
+                                                  type: "application/vnd.openxmlformates-officedocument.spreadsheetml.sheet")
   end
 
   private

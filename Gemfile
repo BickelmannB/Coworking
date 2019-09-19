@@ -19,13 +19,14 @@ gem 'sidekiq-failures', '~> 1.0'
 gem 'webpacker'
 gem 'email_validator'
 gem 'jquery-ui-rails'
-gem 'acts_as_xlsx'
 gem 'devise'
 gem 'cloudinary', '~> 1.9.1'
 gem 'carrierwave', '~> 1.3.1'
 gem "simple_calendar", "~> 2.0"
 gem 'rails-jquery-autocomplete'
 gem 'geocoder'
+gem 'rubyzip', '>= 1.2.1'
+gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

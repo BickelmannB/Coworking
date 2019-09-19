@@ -1,5 +1,4 @@
 class Workplace < ApplicationRecord
-  acts_as_xlsx columns: [:name, :total_places, :description, :created_at]
   validates :name, presence: true
   validates :total_places, presence: true, numericality: { only_integer: true }
   validates :description, presence: true,  length: { maximum: 70 }
@@ -17,5 +16,19 @@ class Workplace < ApplicationRecord
       current_date += 1
     end
     return true
+  end
+
+  def self.to_xlsx
+    pack = Axlsx::Package.new
+    wb = pack.workbook
+    wb.add_worksheet(name: "Workplaces") do |sheet|
+      # Create the header row
+      sheet.add_row ["Workplace Name", "Total places", "Description"]
+      # Create entries for each item
+      where(nil).each do |workplace|
+        sheet.add_row [workplace.name, workplace.total_places, workplace.description]
+      end
+    end
+    pack
   end
 end
