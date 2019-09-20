@@ -5,7 +5,7 @@
   <body>
     <div class="container text-center">
       <h1>Workplaces</h1>
-      <p>Here is the list of available Workplaces ( click <%= link_to 'here', export_path(format: "xlsx") %> to export all the workplaces )</p>
+      <p>Here is the list of available Workplaces ( click <%= link_to 'here', export_path(format: "xlsx") %> to export all the workplaces, or <%= link_to 'here', export_filtered_path(format: "xlsx") %> to export the result of your search )</p>
     </div>
     <div id="form" class="container text-center" data-remote="true"> <%= simple_form_for :search, url: load_path, method: :get do |f| %>
       <div class="search-form-control form-group">

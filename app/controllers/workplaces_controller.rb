@@ -6,7 +6,6 @@ class WorkplacesController < ApplicationController
     workplaces
   end
 
-
   def new
     @workplace = Workplace.new
   end
@@ -45,6 +44,15 @@ class WorkplacesController < ApplicationController
   def export_files
     @workplaces = Workplace.all
     send_data(@workplaces.to_xlsx.to_stream.read, filename: 'workplace.xlsx',
+                                                  disposition: 'attachment',
+                                                  encoding: 'UTF-8',
+                                                  type: "application/vnd.openxmlformates-officedocument.spreadsheetml.sheet")
+  end
+
+  def export_filtered_files
+    @workplaces = Workplace.all
+    @workplaces = @workplaces.where("description ILIKE ?", "%#{cookies[:search]}%") if cookies[:search].present? && params[:search] != ""
+    send_data(@workplaces.to_xlsx.to_stream.read, filename: 'workplace_filtered.xlsx',
                                                   disposition: 'attachment',
                                                   encoding: 'UTF-8',
                                                   type: "application/vnd.openxmlformates-officedocument.spreadsheetml.sheet")

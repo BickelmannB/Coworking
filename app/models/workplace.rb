@@ -5,7 +5,8 @@ class Workplace < ApplicationRecord
   mount_uploader :photo, PhotoUploader
 
   def reservations_count(date)
-    Reservation.where("workplace_id = :id AND starting_date <= :date AND ending_date >= :date", id: id, date: date).count
+    Reservation.where("workplace_id = :id AND starting_date <= :date AND ending_date >= :date",
+                      id: id, date: date).count
   end
 
   def bookable?(begin_date, end_date)

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/users/user_adress', to: "users#user_adress"
   get 'workplaces/load_wp', to: "workplaces#load_wp", as: 'load'
   get 'workplaces/export_files', to: "workplaces#export_files", as: 'export'
+  get 'workplaces/export_filtered_files', to: "workplaces#export_filtered_files", as: 'export_filtered'
   resources :requests, only: [:index, :new, :create, :show]
   resources :workplaces
   resources :reservations
