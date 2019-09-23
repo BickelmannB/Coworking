@@ -58,6 +58,11 @@ class WorkplacesController < ApplicationController
                                                   type: "application/vnd.openxmlformates-officedocument.spreadsheetml.sheet")
   end
 
+  def import
+    Workplace.import(params[:file])
+    redirect_to workplaces_path, notice: "Data imported!"
+  end
+
   private
 
   def workplaces

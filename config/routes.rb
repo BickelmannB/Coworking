@@ -12,8 +12,11 @@ Rails.application.routes.draw do
   get 'workplaces/load_wp', to: "workplaces#load_wp", as: 'load'
   get 'workplaces/export_files', to: "workplaces#export_files", as: 'export'
   get 'workplaces/export_filtered_files', to: "workplaces#export_filtered_files", as: 'export_filtered'
+  get 'workplaces/import', to: "workplaces#import"
   resources :requests, only: [:index, :new, :create, :show]
-  resources :workplaces
+  resources :workplaces do
+    collection { post :import }
+  end
   resources :reservations
   resources :users, only: [:edit, :update, :show]
 end

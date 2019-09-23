@@ -10,4 +10,12 @@
 
   <button type="button" class="btn btn-outline-success"><%= f.button :submit %> </button>
 <% end %>
+</div><br><br>
+
+<div class="container text-center">
+  <h2 class="pt-3 pb-5">Import a Workplace</h2>
+  <%= form_tag import_workplaces_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import CSV" %>
+  <% end %>
 </div>

@@ -1,4 +1,7 @@
 class Workplace < ApplicationRecord
+  require 'csv'
+  require 'activerecord-import/base'
+  require 'activerecord-import/active_record/adapters/postgresql_adapter'
   validates :name, presence: true
   validates :total_places, presence: true, numericality: { only_integer: true }
   validates :description, presence: true,  length: { maximum: 70 }
@@ -31,5 +34,13 @@ class Workplace < ApplicationRecord
       end
     end
     pack
+  end
+
+  def self.import(file)
+    workplace = []
+    CSV.foreach(file.path, headers: true) do |row|
+      workplace << Workplace.new(row.to_hash)
+    end
+    Workplace.import workplace, recursive: true
   end
 end

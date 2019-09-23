@@ -27,6 +27,7 @@ gem 'rails-jquery-autocomplete'
 gem 'geocoder'
 gem 'rubyzip', '>= 1.2.1'
 gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
+gem 'activerecord-import'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
