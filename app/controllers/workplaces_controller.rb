@@ -59,7 +59,7 @@ class WorkplacesController < ApplicationController
   end
 
   def import
-    Workplace.import(params[:file])
+    Workplace.my_import(params[:file])
     redirect_to workplaces_path, notice: "Data imported!"
   end
 

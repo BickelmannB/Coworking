@@ -46,6 +46,16 @@ class ReservationsController < ApplicationController
     redirect_to reservations_path
   end
 
+  def pdf
+    @reservations = Reservation.where("user_id = :id", id: current_user)
+    html = render_to_string(action: "index", layout: false)
+    kit = PDFKit.new(html, page_size: 'Letter',
+                           footer_center: "Page [page] of [toPage]",
+                           header_html: "www.google.fr")
+    # kit.stylesheets << '/app/assets/stylesheets/pages/index.scss'
+    send_data(kit.to_pdf, filename: 'report.pdf', type: 'application/pdf', dispotition: 'inline')
+  end
+
   private
 
   def check_user

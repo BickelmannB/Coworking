@@ -36,7 +36,7 @@ class Workplace < ApplicationRecord
     pack
   end
 
-  def self.import(file)
+  def self.my_import(file)
     workplace = []
     CSV.foreach(file.path, headers: true) do |row|
       workplace << Workplace.new(row.to_hash)

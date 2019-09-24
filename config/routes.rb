@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'workplaces/export_files', to: "workplaces#export_files", as: 'export'
   get 'workplaces/export_filtered_files', to: "workplaces#export_filtered_files", as: 'export_filtered'
   get 'workplaces/import', to: "workplaces#import"
+  get 'reservations/pdf', to: "reservations#pdf", as: 'pdf'
   resources :requests, only: [:index, :new, :create, :show]
   resources :workplaces do
     collection { post :import }
