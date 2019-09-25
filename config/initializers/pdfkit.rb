@@ -9,10 +9,11 @@ PDFKit.configure do |config|
     margin_bottom: '23',
     margin_left: '10',
     margin_right: '10',
-    header_spacing: '0',
+    header_spacing: '10',
     header_html: render_header_footer("header"),
     footer_spacing: '2',
     footer_html: render_header_footer("footer"),
+    quiet: true
   }
 end
 end

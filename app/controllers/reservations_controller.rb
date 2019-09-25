@@ -51,7 +51,7 @@ class ReservationsController < ApplicationController
     html = render_to_string(action: "index", layout: false)
     kit = PDFKit.new(html, page_size: 'Letter',
                            footer_center: "Page [page] of [toPage]",
-                           header_html: "www.google.fr")
+                           header_html: "app/views/reservations/header.html")
     # kit.stylesheets << '/app/assets/stylesheets/pages/index.scss'
     send_data(kit.to_pdf, filename: 'report.pdf', type: 'application/pdf', dispotition: 'inline')
   end
