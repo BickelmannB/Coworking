@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  before_action :check_user
+  before_action :check_user, except: :test
   def index
     @reservations = Reservation.where("user_id = :id", id: current_user)
   end
@@ -50,10 +50,14 @@ class ReservationsController < ApplicationController
     @reservations = Reservation.where("user_id = :id", id: current_user)
     html = render_to_string(action: "index", layout: false)
     kit = PDFKit.new(html, page_size: 'Letter',
-                           footer_center: "Page [page] of [toPage]",
-                           header_html: "/app/views/reservations/header.html", layout: false)
+                           # footer_center: "Page [page] of [toPage]",
+                           header_html: "http://localhost:3000/reservations/test")
     # kit.stylesheets << '/app/assets/stylesheets/pages/index.scss'
-    send_data(kit.to_pdf, filename: 'report.pdf', type: 'application/pdf', dispotition: 'inline')
+    send_data(kit.to_pdf, filename: 'report.pdf', type: 'application/pdf', disposition: 'inline')
+  end
+
+  def test
+
   end
 
   private
