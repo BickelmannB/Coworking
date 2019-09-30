@@ -50,14 +50,9 @@ class ReservationsController < ApplicationController
     @reservations = Reservation.where("user_id = :id", id: current_user)
     html = render_to_string(action: "index", layout: false)
     kit = PDFKit.new(html, page_size: 'Letter',
-                           # footer_center: "Page [page] of [toPage]",
-                           header_html: "http://localhost:3000/reservations/test")
-    # kit.stylesheets << '/app/assets/stylesheets/pages/index.scss'
+                           header_html: "public/header.html")
+    kit.stylesheets << "#{Rails.root}/public/pdfstyle.css"
     send_data(kit.to_pdf, filename: 'report.pdf', type: 'application/pdf', disposition: 'inline')
-  end
-
-  def test
-
   end
 
   private

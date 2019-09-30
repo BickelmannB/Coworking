@@ -2,22 +2,22 @@
   <h1>Reservations</h1>
   <p>Here is the list of your reservations ( click <%= link_to "here", pdf_path %> to view yours reservations on PDF format )</p>
 </div>
-<div class="container">
+<div class="container d-flex">
   <div class="table-responsive">
     <table class="table table-bordered text-center">
-      <thead>
+      <thead class="tableheader">
         <tr>
-          <th scope="col">Workplace</th>
-          <th scope="col">Starting date</th>
-          <th scope="col">Ending date</th>
+          <th class="titre" scope="col">Workplace</th>
+          <th class="titre" scope="col">Starting date</th>
+          <th class="titre" scope="col">Ending date</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="tablebody">
         <% @reservations.each do |r| %>
         <tr>
-          <td><%= link_to r.workplace.name, reservation_path(r) %></td>
-          <td><%= r.starting_date %></td>
-          <td><%= r.ending_date %></td>
+          <td class="colonne"><%= link_to r.workplace.name, reservation_path(r) %></td>
+          <td class="colonne"><%= r.starting_date %></td>
+          <td class="colonne"><%= r.ending_date %></td>
           <% end %>
         </tr>
       </tbody>

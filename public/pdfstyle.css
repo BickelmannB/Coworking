@@ -1,0 +1,33 @@
+.tableheader {
+  width: 100%;
+  display: flex;
+}
+
+.titre {
+  background-color: grey;
+  border: solid 1px;
+  border-color: black;
+  color: white;
+  flex-grow: 1;
+}
+
+.tablebody {
+  width: 100%;
+  display: flex;
+}
+.colonne {
+  background-color: lightgrey;
+  border: solid 1px;
+  border-color: black;
+  flex-grow: 1;
+}
+
+.table {
+  border: solid 1px;
+  background-color: lightgrey;
+  width: 100%;
+}
+
+.container {
+  align-items: center;
+}
