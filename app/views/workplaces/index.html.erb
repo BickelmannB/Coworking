@@ -28,8 +28,19 @@
           <div class='col-md-3 m-4'>
             <div class="card border-success" style="width: 16rem; height: 28rem;">
               <div id="avatar-card">
-                <%= cl_image_tag w.photo,
-                width: 254, height: 200, crop: :fill %>
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" style="width: 254; height: 200; crop:fill">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img class="d-block w-100 h-100" src="<%= w.photo %>" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                      <img class="d-block w-100 h-100" src="<%= w.photo2 %>" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                      <img class="d-block w-100 h-100" src="<%= w.photo3 %>" alt="First slide">
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="card-body">
                 <h5 class="card-title text-center"><strong><%=link_to "#{w.name.capitalize}", workplace_path(w) %></strong></h5>
