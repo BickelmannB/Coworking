@@ -6,6 +6,8 @@ class Workplace < ApplicationRecord
   validates :total_places, presence: true, numericality: { only_integer: true }
   validates :description, presence: true,  length: { maximum: 70 }
   mount_uploader :photo, PhotoUploader
+  mount_uploader :photo2, PhotoUploader
+  mount_uploader :photo3, PhotoUploader
 
   def reservations_count(date)
     Reservation.where("workplace_id = :id AND starting_date <= :date AND ending_date >= :date",
