@@ -30,6 +30,7 @@ gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
 gem 'activerecord-import'
 gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
+gem 'mini_magick'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
