@@ -18,7 +18,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @map = User.geocoded
+    @map = []
+    @geo_user = User.geocoded.find(@user.id)
+    @map << @geo_user
     @marker = @map.map do |marker|
       {
         lat: marker.latitude,

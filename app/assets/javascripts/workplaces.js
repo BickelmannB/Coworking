@@ -38,4 +38,6 @@ $("#wp").load(url + "?utf8=✓&search=" + search + "&tri=" + tri);
 
 
 
-$('.carousel').carousel()
+$('.carousel').on("load"), function() {
+  carousel();
+};

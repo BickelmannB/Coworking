@@ -4,6 +4,15 @@
           <%= cl_image_tag @workplace.photo, class: "card-img-top" %>
         </div>
 
+
+<div class="container"
+  id="map"
+  style="width: 50%;
+  height: 300px"
+  data-markers="<%= @marker.to_json %>"
+  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+></div>
+
 <%= simple_form_for @reservation do |f| %>
 <label><strong>Starting date</strong></label><br>
 <input id="resastart" type="date" name="reservation[starting_date]"><br><br>

@@ -2,12 +2,14 @@ class Workplace < ApplicationRecord
   require 'csv'
   require 'activerecord-import/base'
   require 'activerecord-import/active_record/adapters/postgresql_adapter'
+  geocoded_by :address
   validates :name, presence: true
   validates :total_places, presence: true, numericality: { only_integer: true }
   validates :description, presence: true,  length: { maximum: 70 }
   mount_uploader :photo, PhotoUploader
   mount_uploader :photo2, PhotoUploader
   mount_uploader :photo3, PhotoUploader
+  after_validation :geocode
 
   def reservations_count(date)
     Reservation.where("workplace_id = :id AND starting_date <= :date AND ending_date >= :date",
