@@ -5,8 +5,19 @@ class ReservationsController < ApplicationController
   end
 
   def new
-    @workplace = Workplace.find(params[:workplace_id])
+    @workplace = Workplace.geocoded.find(params[:workplace_id])
     @reservation = Reservation.new
+    @user = User.find(current_user.id)
+    @map = []
+    @geo_user = User.geocoded.find(@user.id)
+    @map << @geo_user
+    @map << @workplace
+    @marker = @map.map do |marker|
+      {
+        lat: marker.latitude,
+        lng: marker.longitude
+      }
+    end
   end
 
   def create
