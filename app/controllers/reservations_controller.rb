@@ -1,4 +1,6 @@
 class ReservationsController < ApplicationController
+  require 'net/http'
+  require 'uri'
   before_action :check_user, except: :test
   def index
     @reservations = Reservation.where("user_id = :id", id: current_user)
@@ -10,14 +12,22 @@ class ReservationsController < ApplicationController
     @user = User.find(current_user.id)
     @map = []
     @geo_user = User.geocoded.find(@user.id)
-    @map << @geo_user
-    @map << @workplace
-    @marker = @map.map do |marker|
-      {
-        lat: marker.latitude,
-        lng: marker.longitude
-      }
+    # @map << @geo_user
+    # @map << @workplace
+        uri = URI("https://www.mapquestapi.com/directions/v2/route?key=JcgZc27PbFhSCd31fgF49MorQCA1WfK7&from=marseille&to=paris&outFormat=json&ambiguities=ignore&routeType=fastest&doReverseGeocode=false&enhancedNarrative=false&avoidTimedConditions=false")
+    Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+      request = Net::HTTP::Get.new uri
+      @response = http.request request # Net::HTTPResponse object
     end
+    @json = JSON.parse(@response.body)
+    @map << @json
+    # @marker = @map.map do |marker|
+    #   {
+    #     lat: marker.latitude,
+    #     lng: marker.longitude
+    #   }
+    # end
+    raise
   end
 
   def create
