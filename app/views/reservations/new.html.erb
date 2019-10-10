@@ -23,6 +23,7 @@
     font-family: sans-serif;
     font-size: 0.8em;
     line-height: 2em;
+    z-index: 1;
     }
     .duration {
     font-size: 2em;
@@ -35,13 +36,163 @@
       <div class="container text-center" id="avatar-card" style="width: 20rem; height: 20rem; d-flex">
         <%= cl_image_tag @workplace.photo, class: "card-img-top" %>
       </div>
-      <div class="container"
-        id="map"
-        style="width: 50%;
-        height: 300px"
-        data-markers="<%= @marker.to_json %>"
-        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-      ></div>
+      <div id='map'><div id='instructions'></div></div>
+      <script>
+      // add the JavaScript here
+      mapboxgl.accessToken = "<%= "#{ENV['MAPBOX_API_KEY']}" %>";
+      var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v10',
+      center: [<%= @user.longitude %>, <%= @user.latitude %>], // starting position
+      zoom: 10
+      });
+      // set the bounds of the map
+      // var bounds = [[-123.069003, 45.395273], [-122.303707, 45.612333]];
+      // map.setMaxBounds(bounds);
+      // initialize the map canvas to interact with later
+      var canvas = map.getCanvasContainer();
+      // an arbitrary start will always be the same
+      // only the end or destination will change
+      var start = [<%= @user.longitude %>, <%= @user.latitude %>];
+      // this is where the code for the next step will go
+      // create a function to make a directions request
+      function getRoute(end) {
+      // make a directions request using cycling profile
+      // an arbitrary start will always be the same
+      // only the end or destination will change
+      var start = [<%= @user.longitude %>, <%= @user.latitude %>];
+      var end = [<%= @workplace.longitude %>, <%= @workplace.latitude %>];
+      // var end = [<%= @workplace.longitude %>, <%= @workplace.latitude %>];
+      var url = 'https://api.mapbox.com/directions/v5/mapbox/driving/' + start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1] + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
+      // make an XHR request https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+      var req = new XMLHttpRequest();
+      req.responseType = 'json';
+      req.open('GET', url, true);
+      req.onload = function() {
+      var data = req.response.routes[0];
+      var route = data.geometry.coordinates;
+      var geojson = {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+      type: 'LineString',
+      coordinates: route
+      }
+      };
+      // if the route already exists on the map, reset it using setData
+      if (map.getSource('route')) {
+      map.getSource('route').setData(geojson);
+      } else { // otherwise, make a new request
+      map.addLayer({
+      id: 'route',
+      type: 'line',
+      source: {
+      type: 'geojson',
+      data: {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+      type: 'LineString',
+      coordinates: geojson
+      }
+      }
+      },
+      layout: {
+      'line-join': 'round',
+      'line-cap': 'round'
+      },
+      paint: {
+      'line-color': '#3887be',
+      'line-width': 5,
+      'line-opacity': 0.75
+      }
+      });
+      }
+      // add turn instructions here at the end
+      // get the sidebar and add the instructions
+      var instructions = document.getElementById('instructions');
+      var steps = data.legs[0].steps;
+      var tripInstructions = [];
+      for (var i = 0; i < steps.length; i++) {
+      tripInstructions.push('<br><li>' + steps[i].maneuver.instruction) + '</li>';
+      instructions.innerHTML = '<br><span class="duration">Trip duration: ' + Math.floor(data.duration / 60) + ' min 🚗 </span>' + tripInstructions;
+      }
+      };
+      req.send();
+      }
+      map.on('load', function() {
+      // make an initial directions request that
+      // starts and ends at the same location
+      getRoute(start);
+      // Add starting point to the map
+      map.addLayer({
+      id: 'point',
+      type: 'circle',
+      source: {
+      type: 'geojson',
+      data: {
+      type: 'FeatureCollection',
+      features: [{
+      type: 'Feature',
+      properties: {},
+      geometry: {
+      type: 'Point',
+      coordinates: start
+      }
+      }
+      ]
+      }
+      },
+      paint: {
+      'circle-radius': 10,
+      'circle-color': '#3887be'
+      }
+      });
+
+      // this is where the code from the next step will go
+      canvas.style.cursor = '';
+      var coords = [<%= @workplace.longitude %>, <%= @workplace.latitude %>]
+      var end = {
+    type: 'FeatureCollection',
+    features: [{
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'Point',
+        coordinates: coords
+      }
+    }
+    ]
+  };
+      if (map.getLayer('end')) {
+      map.getSource('end').setData(end);
+      } else {
+      map.addLayer({
+      id: 'end',
+      type: 'circle',
+      source: {
+      type: 'geojson',
+      data: {
+      type: 'FeatureCollection',
+      features: [{
+      type: 'Feature',
+      properties: {},
+      geometry: {
+      type: 'Point',
+      coordinates: coords
+      }
+      }]
+      }
+      },
+      paint: {
+      'circle-radius': 10,
+      'circle-color': '#f30'
+      }
+      });
+      }
+      getRoute(coords);
+      });
+      </script>
       <%= simple_form_for @reservation do |f| %>
       <label><strong>Starting date</strong></label><br>
       <input id="resastart" type="date" name="reservation[starting_date]"><br><br>
