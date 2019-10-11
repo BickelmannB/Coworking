@@ -6,29 +6,6 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.css' rel='stylesheet' />
-    <style>
-    #map {
-    width: 100%;
-    height: 300px;
-    }
-    #instructions {
-    position: absolute;
-    margin: 20px;
-    width: 25%;
-    top: 0;
-    bottom: 20%;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
-    overflow-y: scroll;
-    font-family: sans-serif;
-    font-size: 0.8em;
-    line-height: 2em;
-    z-index: 1;
-    }
-    .duration {
-    font-size: 2em;
-    }
-    </style>
   </head>
   <body>
     <div class="container text-center">
@@ -148,22 +125,21 @@
       'circle-color': '#3887be'
       }
       });
-
       // this is where the code from the next step will go
       canvas.style.cursor = '';
       var coords = [<%= @workplace.longitude %>, <%= @workplace.latitude %>]
       var end = {
-    type: 'FeatureCollection',
-    features: [{
+      type: 'FeatureCollection',
+      features: [{
       type: 'Feature',
       properties: {},
       geometry: {
-        type: 'Point',
-        coordinates: coords
+      type: 'Point',
+      coordinates: coords
       }
-    }
-    ]
-  };
+      }
+      ]
+      };
       if (map.getLayer('end')) {
       map.getSource('end').setData(end);
       } else {
