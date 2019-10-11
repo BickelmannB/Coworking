@@ -7,7 +7,7 @@
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
+    <%= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
     <%= favicon_link_tag asset_path('cw.png') %>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.css' rel='stylesheet' />
@@ -29,6 +29,9 @@
           <% if user_signed_in? %>
           <li class="nav-item border-right">
             <%= link_to "Workplaces", workplaces_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item border-right">
+            <%= link_to "Waiting list", "/requests", class: "nav-link" %>
           </li>
           <li class="nav-item border-right">
           <%= link_to "Create a workplace", new_workplace_path, class: "nav-link" %> </li>
