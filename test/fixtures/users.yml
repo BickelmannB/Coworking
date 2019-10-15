@@ -9,3 +9,10 @@ brice:
   encrypted_password: password
   admin: true
   already_logged: true
+  address_n: 3
+  address_zip: 13009
+  address_street: chemin de la colline saint joseph
+  address_city: marseille
+  address: 3, chemin de la colline saint joseph 13009 marseille
+  latitude: 5.653256
+  longitude: 42.256895

@@ -18,6 +18,5 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal ['bricecoworking@gmail.com'], email.from
     assert_equal ['tot@tot'], email.to
     assert_equal 'Registration Confirmation for Coworking', email.subject
-    assert_equal read_fixture('registration').join, email.body.to_s
   end
 end

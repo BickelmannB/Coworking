@@ -2,3 +2,5 @@ place:
   name: brice
   total_places: 999
   description: the place to be
+  latitude: 5.456315
+  longitude: 42.356896
