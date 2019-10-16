@@ -41,12 +41,8 @@ fixtures :users
   end
 
   test "should get user_address of external api" do
-    uri = URI("https://api-adresse.data.gouv.fr/search/?q=test")
-    Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-      request = Net::HTTP::Get.new uri
-      @response = http.request request # Net::HTTPResponse object
-    end
-    @pjson = JSON.parse(@response.body)
-    assert_not_nil @pjson
+    @page = visit('/users/user_adress?query=place')
+    @json = JSON.parse(@page.body)
+    assert_not_nil @json
   end
 end

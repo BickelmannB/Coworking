@@ -31,6 +31,7 @@ gem 'activerecord-import'
 gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
 gem 'mini_magick'
+gem 'capybara'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
