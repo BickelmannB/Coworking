@@ -41,8 +41,9 @@ fixtures :users
   end
 
   test "should get user_address of external api" do
-    @page = visit('/users/user_adress?query=place')
-    @json = JSON.parse(@page.body)
-    assert_not_nil @json
+    visit('/users/user_adress?query=place')
+    page.has_content?('FeatureCollection')
+    json = JSON.parse(page.body)
+    assert_not_nil json
   end
 end
